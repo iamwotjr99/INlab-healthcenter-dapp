@@ -9,7 +9,12 @@ function App() {
 
   const [web3, setWeb3] = useState();
   const [contract, setContract] = useState();
-  const [sender, setSender] = useState();
+
+  const [txInfo, setTxInfo] = useState({
+    sender: "",
+    receiver: "",
+    ether: "",
+  })
 
   useEffect(() => {
     async function init() {
@@ -23,7 +28,10 @@ function App() {
 
       const account = await web3.eth.requestAccounts();
       console.log("sender: ", account);
-      setSender(account[0]);
+      setTxInfo({
+        ...txInfo,
+        sender: account[0],
+      })
 
       //web3.eth.requestAccounts().then(console.log);
 
@@ -33,25 +41,46 @@ function App() {
   }, [])
 
   const sendHandler = async () => {
-    console.log("sender: ", sender);
     // console.log(await contract.methods.getBalance(owner).call());
-    await contract.methods.sendMoney("0x8c1b888854b474813f4a58f148D0CC034F48991B").send({
-      from: sender,
-      value: web3.utils.toWei('1', 'ether'),
+    await contract.methods.sendMoney(txInfo.receiver).send({
+      from: txInfo.sender,
+      value: web3.utils.toWei(txInfo.ether, 'ether'),
       data: {
         welcome: "hello"
       }
     })
   }
 
+  const changeHandler = (e) => {
+    setTxInfo({
+      ...txInfo,
+      [e.target.name]: e.target.value,
+    })
+    console.log(txInfo);
+  }
+
   return (
     <div className="App">
       <div className='container'>
-        <Form.Select aria-label="Default select example">
-          <option>{sender}</option>
-        </Form.Select>
+        <Form>
+          <Form.Group className='mb-3' controlId="sender">
+            <Form.Label>Sender Account</Form.Label>
+            <Form.Control type="text" name="sender" value={txInfo.sender} onChange={changeHandler} />
+          </Form.Group>
+
+          <Form.Group className='mb-3' controlId="receiver">
+            <Form.Label>Receiver Account</Form.Label>
+            <Form.Control type="text" name="receiver" value={txInfo.receiver} onChange={changeHandler}/>
+          </Form.Group>
+
+          <Form.Group className='mb-3' controlId="ether">
+            <Form.Label>Ether amount</Form.Label>
+            <Form.Control type="number" name="ether" value={txInfo.ether} onChange={changeHandler}/>
+          </Form.Group>
+
+          <Button onClick={sendHandler}>send</Button>
+        </Form>
       </div>
-      <Button onClick={sendHandler}>send</Button>
     </div>
   );
 }
