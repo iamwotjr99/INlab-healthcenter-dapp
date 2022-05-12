@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0xBdEbbA12E7f5673E7d123376a197666C537cBd88"
+export const CONTRACT_ADDRESS = "0x301f4ab5cDA8A5C1868383d9692F119228f39a85"
 
 export const BUY_ABI = [
     {
@@ -26,11 +26,6 @@ export const BUY_ABI = [
             "internalType": "address payable",
             "name": "receiver",
             "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
           }
         ],
         "name": "sendMoney",

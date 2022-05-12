@@ -20,12 +20,11 @@ contract Buy {
         return owner;
     }
 
-    function sendMoney(address payable receiver, uint amount) payable public returns(bool success) {
-        if(accountBalance[owner] < amount ) {
+    function sendMoney(address payable receiver) payable public returns(bool success) {
+        if(accountBalance[owner] < msg.value ) {
             return false;
         }
-        accountBalance[owner] -= amount;
-        accountBalance[receiver] += amount;
+        
         receiver.transfer(msg.value);
         return true;
     }
