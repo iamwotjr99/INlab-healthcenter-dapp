@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { Button, Form } from 'react-bootstrap'
