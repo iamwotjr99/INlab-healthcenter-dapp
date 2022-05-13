@@ -40,7 +40,9 @@ function DoctorSignUp() {
     const signUpHandler = async () => {
         await contract.methods.addDoctor(doctorData.docAddr, doctorData.hospital).send({
             from: doctorData.docAddr
-        }).then(console.log);
+        }).then((error, result) => {
+            console.log(result);
+        });
     }
 
     return (

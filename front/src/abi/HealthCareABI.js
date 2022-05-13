@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x39F24FdCc88A1b32c9dBbF3687a7B1abF9982ad6"
+export const CONTRACT_ADDRESS = "0x390D67592206Ed90940FbC64C491CaBcDF0800Dc"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -42,5 +42,25 @@ export const HEALTH_CARE_ABI = [
     ],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      }
+    ],
+    "name": "getUser",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ]
