@@ -14,7 +14,7 @@ function Main() {
         navigate('/sendether');
     }
 
-    const moveToDoctorSingUp = () => {
+    const moveToDoctorSignUp = () => {
         navigate('/doctorsignup');
     }
 
@@ -38,7 +38,7 @@ function Main() {
   return (
     <div className="main">
       <Button onClick={moveToSendEther}>to send</Button>
-      <Button onClick={moveToDoctorSingUp}>to doctor signup</Button>
+      <Button onClick={moveToDoctorSignUp}>to doctor signup</Button>
       <h6>{userType}: {userAddr}</h6>
     </div>
   );
