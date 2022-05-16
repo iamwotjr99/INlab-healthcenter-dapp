@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0xC544017356CD91456692A0983406877E8C59b242"
+export const CONTRACT_ADDRESS = "0xC434328b0580d8d928d59A6FF91C1bF3FAD61423"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -103,9 +103,46 @@ export const HEALTH_CARE_ABI = [
     "name": "readPatientData",
     "outputs": [
       {
-        "internalType": "string",
+        "components": [
+          {
+            "internalType": "address",
+            "name": "patientAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "patientName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "patientAge",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "patientWeight",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "patientHeight",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "symptom",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct HealthCare.MedicalForm",
         "name": "",
-        "type": "string"
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

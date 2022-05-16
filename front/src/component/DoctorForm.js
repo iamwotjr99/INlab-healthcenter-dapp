@@ -49,6 +49,16 @@ function DoctorForm ({userAddr}) {
                 console.log("-------");
                 await contract.methods.readPatientData(formData.address).call().then(console.log);
             });
+        setFormData({
+            ...formData,
+            address: "",
+            name: "",
+            age: "",
+            weight: "",
+            height: "",
+            symptom: "",
+            description: "",
+        })
     }
 
     return (
