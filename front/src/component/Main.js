@@ -1,22 +1,14 @@
 import Web3 from 'web3';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
+
+import SignUp from './SignUp';
+import DoctorForm from './DoctorForm';
 function Main() {
-    const navigate = useNavigate();
     const [web3, setWeb3] = useState();
     const [contract, setContract] = useState();
     const [userAddr, setUserAddr] = useState();
     const [userType, setUserType] = useState();
-
-    const moveToSendEther = () => {
-        navigate('/sendether');
-    }
-
-    const moveToDoctorSignUp = () => {
-        navigate('/doctorsignup');
-    }
 
     useEffect(() => {
         async function init() {
@@ -37,9 +29,8 @@ function Main() {
 
   return (
     <div className="main">
-      <Button onClick={moveToSendEther}>to send</Button>
-      <Button onClick={moveToDoctorSignUp}>to doctor signup</Button>
-      <h6>{userType}: {userAddr}</h6>
+      {userType ? <DoctorForm userAddr={userAddr} userType={userType}/> 
+        : <SignUp web3={web3}/>}
     </div>
   );
 }

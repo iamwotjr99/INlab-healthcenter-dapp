@@ -7,6 +7,15 @@
   margin-bottom: 20px;
 }
 
+/* main */ 
+.main {
+  margin-top: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .main Button {
   margin-right: 20px;
 }

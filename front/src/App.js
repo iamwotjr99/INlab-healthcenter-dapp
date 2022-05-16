@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './component/Main';
 import SendEther from './component/SendEther';
 import DoctorSignUp from './component/DoctorSignUp';
+import DoctorForm from './component/DoctorForm';
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Main />}/>
         <Route path="/sendether" element={<SendEther />} />
         <Route path="/doctorsignup" element={<DoctorSignUp />} />
+        <Route path="/doctorform" element={<DoctorForm />} />
       </Routes>
     </div>
     </BrowserRouter>
