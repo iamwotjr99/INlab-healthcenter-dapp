@@ -43,7 +43,12 @@ function DoctorForm ({userAddr}) {
             formData.age, formData.weight, formData.height, formData.symptom,
             formData.description).send({
                 from: userAddr
-            }).then(console.log);
+            }).then(async (result) => {
+                console.log("success");
+                console.log(result);
+                console.log("-------");
+                await contract.methods.readPatientData(formData.address).call().then(console.log);
+            });
     }
 
     return (

@@ -59,6 +59,10 @@ contract HealthCare {
         return mediData[_patientAddr].patientName;
     }
 
+    function readPatientData(address _patientAddr) public view returns(string memory) {
+        return mediData[_patientAddr].patientName;
+    }
+
     // get User
     function getUser(address userAddr) view public returns(string memory) {
         return userType[userAddr];
