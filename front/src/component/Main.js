@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
 
 import SignUp from './SignUp';
-import DoctorForm from './DoctorForm';
+import Doctor from './Doctor';
 import Header from './Header';
 function Main() {
     const [web3, setWeb3] = useState();
@@ -32,7 +32,7 @@ function Main() {
     <div className="main_container">
       <Header userType={userType} userAddr={userAddr}/>
       <div className='main'>
-        {userType ? <DoctorForm userAddr={userAddr} userType={userType}/> 
+        {userType ? <Doctor userAddr={userAddr} userType={userType}/> 
           : <SignUp/>}
       </div>
     </div>

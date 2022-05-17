@@ -40,13 +40,27 @@
 
 /* main */ 
 .main {
-  margin-top: 100px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 10px;
+}
 
+.main .doctor {
+  width: 100%;
 }
 
 .main Button {
   margin-right: 20px;
+}
+
+
+/* doctor right */
+
+.doctor_right {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
