@@ -7,9 +7,40 @@
   margin-bottom: 20px;
 }
 
+/* header */
+.header {
+  margin-top: 5px;
+  display: flex;
+  font-size: 1.8em;
+  flex-direction: row;
+  background-color: #FF6633;
+}
+
+.header img {
+  width: 84px;
+  height: 84px;
+  padding-left: 10px;
+  margin-right: 5px;
+}
+
+.header .name {
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.header .sign_in {
+  color: white;
+  margin-left: auto;
+  text-align: center;
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
 /* main */ 
 .main {
-  margin-top: 200px;
+  margin-top: 100px;
   display: flex;
   align-items: center;
   justify-content: center;

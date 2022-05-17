@@ -4,6 +4,7 @@ import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
 
 import SignUp from './SignUp';
 import DoctorForm from './DoctorForm';
+import Header from './Header';
 function Main() {
     const [web3, setWeb3] = useState();
     const [contract, setContract] = useState();
@@ -28,9 +29,12 @@ function Main() {
     }, [])
 
   return (
-    <div className="main">
-      {userType ? <DoctorForm userAddr={userAddr} userType={userType}/> 
-        : <SignUp web3={web3}/>}
+    <div className="main_container">
+      <Header userType={userType} userAddr={userAddr}/>
+      <div className='main'>
+        {userType ? <DoctorForm userAddr={userAddr} userType={userType}/> 
+          : <SignUp/>}
+      </div>
     </div>
   );
 }
