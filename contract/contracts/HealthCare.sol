@@ -45,6 +45,7 @@ contract HealthCare {
 
     // CRUD Patient Data
 
+    // Create
     function addPatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
     string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description) 
     public returns(string memory) {
@@ -62,10 +63,12 @@ contract HealthCare {
         return mediData[_patientAddr].patientName;
     }
 
+    // Read
     function readPatientData(address _patientAddr) public view returns(MedicalForm memory) {
         return mediData[_patientAddr];
     }
 
+    // Update
     function updatePatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
     string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description)
     public returns(bool) {
@@ -82,20 +85,35 @@ contract HealthCare {
         return true;
     }
 
+    // Delete
     function deletePatientData(address _patientAddr) public returns(bool) {
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
 
+        uint index;
+
+        for(uint i = 0; i < docData[msg.sender].patient.length; i++) {
+            if(docData[msg.sender].patient[i] == _patientAddr) {
+                index = i;
+            }
+        }
+
+        for(uint i = index; i < docData[msg.sender].patient.length - 1; i++) {
+            docData[msg.sender].patient[i] = docData[msg.sender].patient[i + 1];
+        }
+
+        docData[msg.sender].patient.pop();
         delete mediData[_patientAddr];
 
         return true;
     }
 
+    // get patient list
     function getPatientList() view public returns (address[] memory){
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
         return docData[msg.sender].patient;
     }
 
-    // get User
+    // get user
     function getUser(address userAddr) view public returns(string memory) {
         return userType[userAddr];
     }

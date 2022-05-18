@@ -61,10 +61,6 @@ function DoctorForm ({userAddr}) {
         })
     }
 
-    const btnReadData = async () => {
-        await contract.methods.readPatientData(formData.address).call().then(console.log);
-    }
-
     return (
         <div className='doctor_form'>
             <Form>
@@ -106,7 +102,6 @@ function DoctorForm ({userAddr}) {
                 </Form.Group>
             </Form>
             <Button variant="warning" onClick={btnAddData}>Create</Button>
-            <Button variant="warning" onClick={btnReadData}>Read</Button>
         </div>
     )
 }
