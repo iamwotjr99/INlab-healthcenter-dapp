@@ -64,3 +64,13 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
+/* doctor search */
+.doctor_search {
+  text-align: left;
+}
+
+.doctor_search .title {
+  font-size: 1.25em;
+  margin-bottom: 5px;
+}

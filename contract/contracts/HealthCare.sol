@@ -15,6 +15,7 @@ contract HealthCare {
     struct Doctor {
         address docAddr;
         string hospital;
+        address[] patient;
     }
 
     struct MedicalForm {
@@ -42,6 +43,8 @@ contract HealthCare {
         return true;
     }
 
+    // CRUD Patient Data
+
     function addPatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
     string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description) 
     public returns(string memory) {
@@ -55,12 +58,37 @@ contract HealthCare {
         mediData[_patientAddr].patientHeight = _patientHeight;
         mediData[_patientAddr].symptom = _symptom;
         mediData[_patientAddr].description = _description;
-    
+        
+        docData[msg.sender].patient[0] = _patientAddr;
         return mediData[_patientAddr].patientName;
     }
 
     function readPatientData(address _patientAddr) public view returns(MedicalForm memory) {
         return mediData[_patientAddr];
+    }
+
+    function updatePatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
+    string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description)
+    public returns(bool) {
+        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
+
+        mediData[_patientAddr].patientAddr = _patientAddr;
+        mediData[_patientAddr].patientName = _patientName;
+        mediData[_patientAddr].patientAge = _patientAge;
+        mediData[_patientAddr].patientWeight = _patientWeight;
+        mediData[_patientAddr].patientHeight = _patientHeight;
+        mediData[_patientAddr].symptom = _symptom;
+        mediData[_patientAddr].description = _description;
+
+        return true;
+    }
+
+    function deletePatientData(address _patientAddr) public returns(bool) {
+        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
+
+        delete mediData[_patientAddr];
+
+        return true;
     }
 
     // get User

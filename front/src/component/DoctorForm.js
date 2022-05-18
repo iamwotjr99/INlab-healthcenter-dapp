@@ -105,8 +105,8 @@ function DoctorForm ({userAddr}) {
                     rows={3} onChange={changeHandler}/>
                 </Form.Group>
             </Form>
-            <Button onClick={btnAddData}>Create</Button>
-            <Button onClick={btnReadData}>Read</Button>
+            <Button variant="warning" onClick={btnAddData}>Create</Button>
+            <Button variant="warning" onClick={btnReadData}>Read</Button>
         </div>
     )
 }

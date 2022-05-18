@@ -16,11 +16,11 @@ function Doctor({ userAddr, userType }) {
                     <Col sm={3}>
                         <ListGroup>
                             <ListGroup.Item action eventKey={0}
-                            value="0" onClick={onClickHandler}>
+                            value="0" variant="warning" onClick={onClickHandler}>
                                 Patient Form
                             </ListGroup.Item>
                             <ListGroup.Item action eventKey={1}
-                            value="1" onClick={onClickHandler}>
+                            value="1" variant="warning" onClick={onClickHandler}>
                                 Patient Data Search
                             </ListGroup.Item>
                         </ListGroup>
