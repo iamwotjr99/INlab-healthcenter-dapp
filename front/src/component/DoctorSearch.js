@@ -37,7 +37,6 @@ function DoctorSearch() {
 
     const btnGetData = async () => {
         const result = await contract.methods.readPatientData(input).call().then(setToggle(true));
-        console.log(result.patientAge);
         setPatientData({
             ...patientData,
             address: result.patientAddr,

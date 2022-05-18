@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0xC434328b0580d8d928d59A6FF91C1bF3FAD61423"
+export const CONTRACT_ADDRESS = "0x6eda033C64FD2F88214b78A60e99D237Ce5A82FC"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -143,6 +143,88 @@ export const HEALTH_CARE_ABI = [
         "internalType": "struct HealthCare.MedicalForm",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_patientAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_patientName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_patientAge",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_patientWeight",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_patientHeight",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_symptom",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "updatePatientData",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_patientAddr",
+        "type": "address"
+      }
+    ],
+    "name": "deletePatientData",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPatientList",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
       }
     ],
     "stateMutability": "view",

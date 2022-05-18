@@ -48,8 +48,7 @@ contract HealthCare {
     function addPatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
     string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description) 
     public returns(string memory) {
-        require(keccak256(abi.encodePacked(userType[msg.sender]))
-        == keccak256(abi.encodePacked("doctor")));
+        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
 
         mediData[_patientAddr].patientAddr = _patientAddr;
         mediData[_patientAddr].patientName = _patientName;
@@ -59,7 +58,7 @@ contract HealthCare {
         mediData[_patientAddr].symptom = _symptom;
         mediData[_patientAddr].description = _description;
         
-        docData[msg.sender].patient[0] = _patientAddr;
+        docData[msg.sender].patient.push(_patientAddr);
         return mediData[_patientAddr].patientName;
     }
 
@@ -89,6 +88,11 @@ contract HealthCare {
         delete mediData[_patientAddr];
 
         return true;
+    }
+
+    function getPatientList() view public returns (address[] memory){
+        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
+        return docData[msg.sender].patient;
     }
 
     // get User

@@ -1,9 +1,12 @@
 import DoctorForm from "./DoctorForm"
 import DoctorSearch from "./DoctorSearch"
+import DoctorPatientList from "./DoctorPatientList";
 function DoctorRight ({ userAddr ,listKey }) {
     return (
         <div className="doctor_right">
-            {listKey == 1 ?  <DoctorSearch /> : <DoctorForm userAddr={userAddr}/>}
+            {listKey == 0 ?  <DoctorForm userAddr={userAddr} /> : 
+             listKey == 1 ?  <DoctorSearch /> :
+             listKey == 2 ? <DoctorPatientList /> : ""}
         </div>
     )
 }

@@ -23,6 +23,10 @@ function Doctor({ userAddr, userType }) {
                             value="1" variant="warning" onClick={onClickHandler}>
                                 Patient Data Search
                             </ListGroup.Item>
+                            <ListGroup.Item action eventKey={2}
+                            value="2" variant="warning" onClick={onClickHandler}>
+                                Patient List
+                            </ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col sm={8}>
