@@ -47,16 +47,22 @@ function DoctorPatientList() {
         <div className="doctor_patient_list">
             {toggle ? <DocPatientUpdate setToggle={setToggle} patientAddr={patientAddr} account={account} contract={contract} /> : 
                 <div>
-                    <h1>Patient List</h1>
+                    <div className='title'>Patient List</div>
+                    <hr></hr>
                     {patienList.map((item, index) => {
-                        return (<li key={index}>{item} 
-                        <Button
-                            value={item}
-                            onClick={btnUpdateToggle}>Update</Button>
-                        <Button 
-                            value={item}
-                            onClick={btnDeleteHandler}>Delete
-                        </Button></li>)
+                        return (<div className="list_item" key={index}>Account: {item}
+                        <div className='list_button'>
+                            <Button
+                                variant='warning'
+                                value={item}
+                                onClick={btnUpdateToggle}>Update</Button>
+                            <Button 
+                                variant='danger'
+                                value={item}
+                                onClick={btnDeleteHandler}>Delete
+                            </Button>
+                            </div>
+                        </div>)
                     })}
                 </div>
             }

@@ -1,14 +1,15 @@
 import Web3 from 'web3';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import doctorImg from '../image/img_doctor.png';
 function SignUp () {
     const navigate = useNavigate();
     const [web3, setWeb3] = useState();
 
-    const moveToSendEther = () => {
-        navigate('/sendether');
-    }
+    // const moveToSendEther = () => {
+    //     navigate('/sendether');
+    // }
 
     const moveToDoctorSignUp = () => {
         navigate('/doctorsignup');
@@ -27,8 +28,18 @@ function SignUp () {
 
   return (
     <div className="main">
-      <Button onClick={moveToSendEther}>to send</Button>
-      <Button onClick={moveToDoctorSignUp}>to doctor signup</Button>
+      <Card style={{width: '18rem'}}>
+        <Card.Img variant='top' src={doctorImg}/>
+        <Card.Body>
+          <Card.Title>Sign Up</Card.Title>
+          <Card.Text>
+            If you are doctor, you sign up INLAB Health Center and then,
+            you can manage your patient with our service.
+          </Card.Text>
+          <Button variant='warning'
+            onClick={moveToDoctorSignUp}>Go sign up!</Button>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

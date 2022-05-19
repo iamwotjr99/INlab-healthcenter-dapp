@@ -81,3 +81,24 @@
   font-size: 1.25em;
   margin-bottom: 5px;
 }
+
+/* doctor patient list */
+.doctor_patient_list {
+  text-align: left;
+}
+
+.doctor_patient_list .title {
+  font-size: 1.25em;
+  margin-bottom: 5px;
+}
+
+.doctor_patient_list .list_item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.doctor_patient_list .list_item .list_button {
+  margin-left: auto;
+}
