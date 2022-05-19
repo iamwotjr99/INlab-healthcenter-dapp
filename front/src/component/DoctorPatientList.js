@@ -45,7 +45,7 @@ function DoctorPatientList() {
 
     return (
         <div className="doctor_patient_list">
-            {toggle ? <DocPatientUpdate patientAddr={patientAddr} account={account} contract={contract} /> : 
+            {toggle ? <DocPatientUpdate setToggle={setToggle} patientAddr={patientAddr} account={account} contract={contract} /> : 
                 <div>
                     <h1>Patient List</h1>
                     {patienList.map((item, index) => {

@@ -2,6 +2,7 @@ import Web3 from 'web3';
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
+import Header from './Header';
 function DoctorSignUp() {
     const [doctorData, setDoctorData] = useState({
         docAddr: "",
@@ -46,19 +47,22 @@ function DoctorSignUp() {
     }
 
     return (
-        <div className='doctor_signup'>
-            <Form>
-                <Form.Group className='mb-3' controlId="doctor_address">
-                    <Form.Label>Your address</Form.Label>
-                    <Form.Control type="text" name="docAddr" value={doctorData.docAddr} onChange={changeHandler}/>
-                </Form.Group>
+        <div className='doctor_signup_container'>
+            <Header />
+            <div className='doctor_signup'>
+                <Form>
+                    <Form.Group className='mb-3' controlId="doctor_address">
+                        <Form.Label>Your address</Form.Label>
+                        <Form.Control type="text" name="docAddr" value={doctorData.docAddr} onChange={changeHandler}/>
+                    </Form.Group>
 
-                <Form.Group className='mb-3' controlId="hospital_name">
-                    <Form.Label>Your hospital name</Form.Label>
-                    <Form.Control type="text" name="hospital" value={doctorData.hospital} onChange={changeHandler}/>
-                </Form.Group>
-            </Form>
-            <Button onClick={signUpHandler}>Sign Up</Button>
+                    <Form.Group className='mb-3' controlId="hospital_name">
+                        <Form.Label>Your hospital name</Form.Label>
+                        <Form.Control type="text" name="hospital" value={doctorData.hospital} onChange={changeHandler}/>
+                    </Form.Group>
+                    <Button onClick={signUpHandler}>Sign Up</Button>
+                </Form>
+            </div>
         </div>
     )
 }

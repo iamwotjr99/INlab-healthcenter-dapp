@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-function DocPatientUpdate({ patientAddr, account, contract }) {
+function DocPatientUpdate({ setToggle, patientAddr, account, contract }) {
     const [formData, setFormData] = useState({
         address: "",
         name: "",
@@ -40,7 +40,7 @@ function DocPatientUpdate({ patientAddr, account, contract }) {
     const btnUpdateHandler = async () => {
         await contract.methods.updatePatientData(patientAddr, formData.name,
             formData.age, formData.weight, formData.height, formData.symptom,
-            formData.description).send({from: account}).then(console.log);
+            formData.description).send({from: account}).then(setToggle(false));
     }
 
     return (
