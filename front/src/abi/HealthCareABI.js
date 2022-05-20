@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x6708CAfaBB0309631801dAa42906C21ad96D3Ac7"
+export const CONTRACT_ADDRESS = "0xFFAC78991FEc3145B3AF4f309d9e685A8CB62417"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -262,9 +262,26 @@ export const HEALTH_CARE_ABI = [
     "name": "getPatientList",
     "outputs": [
       {
-        "internalType": "address[]",
+        "components": [
+          {
+            "internalType": "address",
+            "name": "patAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "age",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct HealthCare.Patient[]",
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",

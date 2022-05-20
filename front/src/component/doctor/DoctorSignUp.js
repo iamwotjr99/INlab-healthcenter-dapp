@@ -1,8 +1,8 @@
 import Web3 from 'web3';
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
-import Header from './Header';
+import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
+import Header from '../Header';
 function DoctorSignUp() {
     const [doctorData, setDoctorData] = useState({
         docAddr: "",

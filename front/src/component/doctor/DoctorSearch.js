@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../abi/HealthCareABI';
+import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../../abi/HealthCareABI';
 import { Form, Button, FormControl } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 

@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Main from './component/Main';
 import SendEther from './component/SendEther';
-import DoctorSignUp from './component/DoctorSignUp';
-import DoctorForm from './component/DoctorForm';
+import DoctorSignUp from './component/doctor/DoctorSignUp';
+import DoctorForm from './component/doctor/DoctorForm';
 import PatientSignUp from './component/PatientSignUp';
 function App() {
 

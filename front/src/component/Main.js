@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
 
 import SignUp from './SignUp';
-import Doctor from './Doctor';
+import Doctor from './doctor/Doctor';
 import Header from './Header';
+import Patient from './Patient';
 function Main() {
     const [userAddr, setUserAddr] = useState();
     const [userType, setUserType] = useState();
@@ -29,7 +30,8 @@ function Main() {
       <Header userType={userType} userAddr={userAddr}/>
       <div className='main'>
         {userType == "doctor" ? <Doctor userAddr={userAddr} userType={userType} /> :
-         userType == "patient" ? <></> : <SignUp/>}
+         userType == "patient" ? <Patient userAddr={userAddr} userType={userType} /> : 
+          <SignUp/>}
       </div>
     </div>
   );

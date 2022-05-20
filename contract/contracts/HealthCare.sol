@@ -16,7 +16,7 @@ contract HealthCare {
     struct Doctor {
         address docAddr;
         string hospital;
-        address[] patient;
+        Patient[] patients;
     }
 
     struct Patient {
@@ -69,7 +69,7 @@ contract HealthCare {
         // CRUD state
         mediData[_patientAddr].state = 0; 
         
-        docData[msg.sender].patient.push(_patientAddr);
+        docData[msg.sender].patients.push(Patient(_patientAddr, _patientName, _patientAge));
         return mediData[_patientAddr].patientName;
     }
 
@@ -101,17 +101,17 @@ contract HealthCare {
 
         uint index;
 
-        for(uint i = 0; i < docData[msg.sender].patient.length; i++) {
-            if(docData[msg.sender].patient[i] == _patientAddr) {
+        for(uint i = 0; i < docData[msg.sender].patients.length; i++) {
+            if(docData[msg.sender].patients[i].patAddr == _patientAddr) {
                 index = i;
             }
         }
 
-        for(uint i = index; i < docData[msg.sender].patient.length - 1; i++) {
-            docData[msg.sender].patient[i] = docData[msg.sender].patient[i + 1];
+        for(uint i = index; i < docData[msg.sender].patients.length - 1; i++) {
+            docData[msg.sender].patients[i] = docData[msg.sender].patients[i + 1];
         }
 
-        docData[msg.sender].patient.pop();
+        docData[msg.sender].patients.pop();
         delete mediData[_patientAddr];
 
         return true;
@@ -130,9 +130,9 @@ contract HealthCare {
     }
 
     // get patient list
-    function getPatientList(address _doctorAddr) view public returns (address[] memory){
+    function getPatientList(address _doctorAddr) view public returns (Patient[] memory){
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
-        return docData[_doctorAddr].patient;
+        return docData[_doctorAddr].patients;
     }
 
     // get user

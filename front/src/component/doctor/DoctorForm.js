@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
+import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 function DoctorForm ({userAddr}) {
     const [formData, setFormData] = useState({
         address: "",

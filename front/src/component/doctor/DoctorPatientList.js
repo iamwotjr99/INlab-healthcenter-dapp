@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
-import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
+import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 import DocPatientUpdate from './DocPatientUpdate';
 function DoctorPatientList() {
 
@@ -51,7 +51,7 @@ function DoctorPatientList() {
                     <div className='title'>Patient List</div>
                     <hr></hr>
                     {patienList.map((item, index) => {
-                        return (<div className="list_item" key={index}>Account: {item}
+                        return (<div className="list_item" key={index}>Name: {item.name} || Account: {item.patAddr}
                         <div className='list_button'>
                             <Button
                                 variant='warning'
