@@ -26,6 +26,7 @@ contract HealthCare {
         string patientHeight;
         string symptom;
         string description;
+        uint state;
     }
 
     // event
@@ -58,6 +59,8 @@ contract HealthCare {
         mediData[_patientAddr].patientHeight = _patientHeight;
         mediData[_patientAddr].symptom = _symptom;
         mediData[_patientAddr].description = _description;
+        // CRUD state
+        mediData[_patientAddr].state = 0; 
         
         docData[msg.sender].patient.push(_patientAddr);
         return mediData[_patientAddr].patientName;
@@ -108,9 +111,9 @@ contract HealthCare {
     }
 
     // get patient list
-    function getPatientList() view public returns (address[] memory){
+    function getPatientList(address _doctorAddr) view public returns (address[] memory){
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
-        return docData[msg.sender].patient;
+        return docData[_doctorAddr].patient;
     }
 
     // get user

@@ -6,7 +6,7 @@ import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
 import DocPatientUpdate from './DocPatientUpdate';
 function DoctorPatientList() {
 
-    const [patienList, setPaientList] = useState([]);
+    const [patienList, setPatientList] = useState([]);
     const [contract, setContract] = useState();
     const [account , setAccount] = useState();
     const [count, setCount] = useState(0);
@@ -22,18 +22,19 @@ function DoctorPatientList() {
 
             const account = await web3.eth.requestAccounts();
             setAccount(account[0])
-            const result = await contract.methods.getPatientList().call();
-            console.log(result);
-            setPaientList(result);
+
+            setPatientList([]);
+            const result = await contract.methods.getPatientList(account[0]).call();
+            console.log("result: ", result);
+            setPatientList(result);
         }
 
         init();
     }, [count])
 
     const btnDeleteHandler = async (e) => {
-        setPatientAddr(e.target.value);
-        console.log(patientAddr);
-        await contract.methods.deletePatientData(patientAddr).send({
+        const deletePatientAddr = e.target.value;
+        await contract.methods.deletePatientData(deletePatientAddr).send({
             from: account
         }).then(setCount(count + 1));
     }

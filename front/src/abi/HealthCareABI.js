@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0xd7548fE87944AD4427B994Ae3FC6F1Ca19D9aACc"
+export const CONTRACT_ADDRESS = "0x3eA6Da6Df617F00F6fB3cF56AdEefFC284686601"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -138,6 +138,11 @@ export const HEALTH_CARE_ABI = [
             "internalType": "string",
             "name": "description",
             "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "state",
+            "type": "uint256"
           }
         ],
         "internalType": "struct HealthCare.MedicalForm",
@@ -218,7 +223,13 @@ export const HEALTH_CARE_ABI = [
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_doctorAddr",
+        "type": "address"
+      }
+    ],
     "name": "getPatientList",
     "outputs": [
       {
