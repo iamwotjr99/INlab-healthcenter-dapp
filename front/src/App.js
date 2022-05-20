@@ -5,7 +5,7 @@ import Main from './component/Main';
 import SendEther from './component/SendEther';
 import DoctorSignUp from './component/DoctorSignUp';
 import DoctorForm from './component/DoctorForm';
-import Doctor from './component/Doctor';
+import PatientSignUp from './component/PatientSignUp';
 function App() {
 
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route path="/sendether" element={<SendEther />} />
         <Route path="/doctorsignup" element={<DoctorSignUp />} />
         <Route path="/doctorform" element={<DoctorForm />} />
-        <Route path="/test" element={<Doctor />} />
+        <Route path="/patientsignup" element={<PatientSignUp />} />
       </Routes>
     </div>
     </BrowserRouter>

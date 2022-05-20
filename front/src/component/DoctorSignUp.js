@@ -9,13 +9,11 @@ function DoctorSignUp() {
         hospital: "",
     });
 
-    const [web3, setWeb3] = useState();
     const [contract, setContract] = useState();
 
     useEffect(() => {
         async function init() {
             const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
-            setWeb3(web3);
 
             const contract = new web3.eth.Contract(HEALTH_CARE_ABI, CONTRACT_ADDRESS);
             setContract(contract);

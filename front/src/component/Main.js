@@ -6,18 +6,14 @@ import SignUp from './SignUp';
 import Doctor from './Doctor';
 import Header from './Header';
 function Main() {
-    const [web3, setWeb3] = useState();
-    const [contract, setContract] = useState();
     const [userAddr, setUserAddr] = useState();
     const [userType, setUserType] = useState();
 
     useEffect(() => {
         async function init() {
             const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
-            setWeb3(web3);
 
             const contract = new web3.eth.Contract(HEALTH_CARE_ABI, CONTRACT_ADDRESS);
-            setContract(contract);
 
             const account = await web3.eth.requestAccounts();
             setUserAddr(account[0]);
@@ -32,8 +28,8 @@ function Main() {
     <div className="main_container">
       <Header userType={userType} userAddr={userAddr}/>
       <div className='main'>
-        {userType ? <Doctor userAddr={userAddr} userType={userType}/> 
-          : <SignUp/>}
+        {userType == "doctor" ? <Doctor userAddr={userAddr} userType={userType} /> :
+         userType == "patient" ? <></> : <SignUp/>}
       </div>
     </div>
   );

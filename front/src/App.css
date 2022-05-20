@@ -102,3 +102,11 @@
 .doctor_patient_list .list_item .list_button {
   margin-left: auto;
 }
+
+/* patient sign up */
+.patient_sign_up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}

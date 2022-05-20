@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x3eA6Da6Df617F00F6fB3cF56AdEefFC284686601"
+export const CONTRACT_ADDRESS = "0x6708CAfaBB0309631801dAa42906C21ad96D3Ac7"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -212,6 +212,35 @@ export const HEALTH_CARE_ABI = [
       }
     ],
     "name": "deletePatientData",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_patAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_age",
+        "type": "string"
+      }
+    ],
+    "name": "addPatient",
     "outputs": [
       {
         "internalType": "bool",

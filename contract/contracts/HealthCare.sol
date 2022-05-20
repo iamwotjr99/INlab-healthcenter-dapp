@@ -7,6 +7,7 @@ contract HealthCare {
     mapping(address => string) userType;
     mapping(address => Doctor) docData;
     mapping(address => MedicalForm) mediData;
+    mapping(address => Patient) patData;
 
     constructor() public {
         authCaller[msg.sender] = 1;
@@ -16,6 +17,12 @@ contract HealthCare {
         address docAddr;
         string hospital;
         address[] patient;
+    }
+
+    struct Patient {
+        address patAddr;
+        string name;
+        string age;
     }
 
     struct MedicalForm {
@@ -106,6 +113,18 @@ contract HealthCare {
 
         docData[msg.sender].patient.pop();
         delete mediData[_patientAddr];
+
+        return true;
+    }
+
+    // paitent
+    function addPatient(address _patAddr, string memory _name, string memory _age) public returns (bool) {
+        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("")));
+
+        userType[msg.sender] = "patient";
+        patData[msg.sender].patAddr = _patAddr;
+        patData[msg.sender].name = _name;
+        patData[msg.sender].age = _age;
 
         return true;
     }
