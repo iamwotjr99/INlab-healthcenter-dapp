@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x8F24a125dc9FE5F5B99F4d290Fd3d270831064E3"
+export const CONTRACT_ADDRESS = "0x94920A7BCd1D00c30e9Bc6BFb1089c595eA7bbd8"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -84,9 +84,9 @@ export const HEALTH_CARE_ABI = [
     "name": "addPatientData",
     "outputs": [
       {
-        "internalType": "string",
+        "internalType": "bool",
         "name": "",
-        "type": "string"
+        "type": "bool"
       }
     ],
     "stateMutability": "nonpayable",
@@ -226,6 +226,43 @@ export const HEALTH_CARE_ABI = [
     "inputs": [
       {
         "internalType": "address",
+        "name": "_doctorAddr",
+        "type": "address"
+      }
+    ],
+    "name": "getPatientList",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "patAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "age",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct HealthCare.Patient[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_patAddr",
         "type": "address"
       },
@@ -255,31 +292,56 @@ export const HEALTH_CARE_ABI = [
     "inputs": [
       {
         "internalType": "address",
-        "name": "_doctorAddr",
+        "name": "_patientAddr",
         "type": "address"
       }
     ],
-    "name": "getPatientList",
+    "name": "readPatientTreats",
     "outputs": [
       {
         "components": [
           {
             "internalType": "address",
-            "name": "patAddr",
+            "name": "patientAddr",
             "type": "address"
           },
           {
             "internalType": "string",
-            "name": "name",
+            "name": "patientName",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "age",
+            "name": "patientAge",
             "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "patientWeight",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "patientHeight",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "symptom",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "state",
+            "type": "uint256"
           }
         ],
-        "internalType": "struct HealthCare.Patient[]",
+        "internalType": "struct HealthCare.MedicalForm[]",
         "name": "",
         "type": "tuple[]"
       }

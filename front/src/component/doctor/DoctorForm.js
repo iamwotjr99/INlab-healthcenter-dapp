@@ -47,7 +47,6 @@ function DoctorForm ({userAddr}) {
                 console.log("success");
                 console.log(result);
                 console.log("-------");
-                await contract.methods.readPatientData(formData.address).call().then(console.log);
             });
         setFormData({
             ...formData,

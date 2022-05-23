@@ -1,8 +1,8 @@
 import PatientSearch from "./PatientSearch";
-function PatientRight({contract, listKey}) {
+function PatientRight({contract, listKey, account}) {
     return (
         <div className="patient_right">
-            <PatientSearch contract={contract}/>
+            <PatientSearch contract={contract} account={account}/>
         </div>
     )
 }

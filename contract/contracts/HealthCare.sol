@@ -8,6 +8,8 @@ contract HealthCare {
     mapping(address => Doctor) docData;
     mapping(address => MedicalForm) mediData;
     mapping(address => Patient) patData;
+    mapping(address => MedicalForm[]) treatments;
+    mapping(address => Patient[]) patientList;
 
     constructor() public {
         authCaller[msg.sender] = 1;
@@ -56,26 +58,20 @@ contract HealthCare {
     // Create
     function addPatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
     string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description) 
-    public returns(string memory) {
+    public returns(bool) {
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
 
-        mediData[_patientAddr].patientAddr = _patientAddr;
-        mediData[_patientAddr].patientName = _patientName;
-        mediData[_patientAddr].patientAge = _patientAge;
-        mediData[_patientAddr].patientWeight = _patientWeight;
-        mediData[_patientAddr].patientHeight = _patientHeight;
-        mediData[_patientAddr].symptom = _symptom;
-        mediData[_patientAddr].description = _description;
-        // CRUD state
-        mediData[_patientAddr].state = 0; 
+        treatments[_patientAddr].push(MedicalForm(_patientAddr, _patientName, _patientAge, _patientWeight, _patientHeight,
+        _symptom, _description, 0));
+
         
-        docData[msg.sender].patients.push(Patient(_patientAddr, _patientName, _patientAge));
-        return mediData[_patientAddr].patientName;
+        patientList[msg.sender].push(Patient(_patientAddr, _patientName, _patientAge));
+        return true;
     }
 
     // Read
     function readPatientData(address _patientAddr) public view returns(MedicalForm memory) {
-        return mediData[_patientAddr];
+        return treatments[_patientAddr][0];
     }
 
     // Update
@@ -117,6 +113,12 @@ contract HealthCare {
         return true;
     }
 
+    // get patient list
+    function getPatientList(address _doctorAddr) view public returns (Patient[] memory){
+        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
+        return patientList[_doctorAddr];
+    }
+
     // paitent
     function addPatient(address _patAddr, string memory _name, string memory _age) public returns (bool) {
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("")));
@@ -129,10 +131,9 @@ contract HealthCare {
         return true;
     }
 
-    // get patient list
-    function getPatientList(address _doctorAddr) view public returns (Patient[] memory){
-        require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
-        return docData[_doctorAddr].patients;
+    // Read Test 
+    function readPatientTreats(address _patientAddr) public view returns(MedicalForm[] memory) {
+        return treatments[_patientAddr];
     }
 
     // get user

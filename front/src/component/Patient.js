@@ -6,12 +6,18 @@ import PatientRight from './PatientRight';
 function Patient() {
     const [listKey, setListKey] = useState();
     const [contract, setContract] = useState();
+    const [account, setAccount] = useState();
 
     useEffect(() => {
-        const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
-
-        const contract = new web3.eth.Contract(HEALTH_CARE_ABI, CONTRACT_ADDRESS);
-        setContract(contract);
+        async function init() {
+            const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
+        
+            const account = await web3.eth.requestAccounts();
+            setAccount(account[0]);
+            const contract = new web3.eth.Contract(HEALTH_CARE_ABI, CONTRACT_ADDRESS);
+            setContract(contract);
+        }
+        init();
     }, [])
 
     const onClickHandler = (e) => {
@@ -40,7 +46,7 @@ function Patient() {
                     </Col>
                     <Col sm={8}>
                         <Card>
-                            <PatientRight contract={contract} listKey={listKey}/>
+                            <PatientRight contract={contract} listKey={listKey} account={account}/>
                         </Card>
                     </Col>
                 </Row>
