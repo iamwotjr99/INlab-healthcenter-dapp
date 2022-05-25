@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-function DocPatientUpdate({ setToggle, patientAddr, account, contract }) {
+function DocPatientUpdate({ setToggle, patientAddr, contract, index, treat, account }) {
     const [formData, setFormData] = useState({
         address: "",
         name: "",
@@ -13,21 +13,16 @@ function DocPatientUpdate({ setToggle, patientAddr, account, contract }) {
     });
 
     useEffect(() => {
-        async function getPatientData() {
-            const result = await contract.methods.readPatientData(patientAddr).call();
-            setFormData({
-                ...formData,
-                address: result.patientAddr,
-                name: result.patientName,
-                age: result.patientAge,
-                weight: result.patientWeight,
-                height: result.patientHeight,
-                symptom: result.symptom,
-                description: result.description,
-            })
-        }
-        getPatientData();
-
+        setFormData({
+            ...formData,
+            address: treat.patientAddr,
+            name: treat.patientName,
+            age: treat.patientAge,
+            weight: treat.patientWeight,
+            height: treat.patientHeight,
+            symptom: treat.symptom,
+            description: treat.description
+        })
     }, [])
 
     const changeHandler = (e) => {
@@ -40,7 +35,7 @@ function DocPatientUpdate({ setToggle, patientAddr, account, contract }) {
     const btnUpdateHandler = async () => {
         await contract.methods.updatePatientData(patientAddr, formData.name,
             formData.age, formData.weight, formData.height, formData.symptom,
-            formData.description).send({from: account}).then(setToggle(false));
+            formData.description, index).send({from: account}).then(setToggle(false));
     }
 
     return (

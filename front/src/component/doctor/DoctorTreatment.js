@@ -1,9 +1,12 @@
 import { Button } from 'react-bootstrap';
 
-function DoctorTreatment({treat, propIndex, account, contract}) {
+function DoctorTreatment({setIndex, setToggle, setTreatment, treat, propIndex, account, contract}) {
     const btnUpdateHandler = (e) => {
         console.log(e.target.value);
         console.log(propIndex);
+        setToggle(true);
+        setIndex(propIndex);
+        setTreatment(treat);
     }
 
     const btnDeleteHandler = async (e) => {
