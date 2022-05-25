@@ -6,7 +6,7 @@ import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 import DocPatientUpdate from './DocPatientUpdate';
 function DoctorPatientList() {
 
-    const [patienList, setPatientList] = useState([]);
+    const [patientList, setPatientList] = useState([]);
     const [contract, setContract] = useState();
     const [account , setAccount] = useState();
     const [count, setCount] = useState(0);
@@ -22,10 +22,23 @@ function DoctorPatientList() {
 
             const account = await web3.eth.requestAccounts();
             setAccount(account[0])
+            console.log(account[0]);
 
             setPatientList([]);
-            const result = await contract.methods.getPatientList(account[0]).call();
-            console.log("result: ", result);
+            const array = await contract.methods.getPatientList().call();
+            // const dumpArr = [];
+            // array.forEach((item) => {
+            //     dumpArr.push(item.patAddr);
+            // })
+            // const set = new Set(dumpArr);
+            // const accountArr = [...set];
+            // console.log("result: ", accountArr);
+            const map = new Map();
+            for(const item of array) {
+                map.set(JSON.stringify(item.patAddr, item.name), [item.patAddr, item.name]);
+            }
+            const result = [...map.values()];
+            console.log(result);
             setPatientList(result);
         }
 
@@ -50,17 +63,13 @@ function DoctorPatientList() {
                 <div>
                     <div className='title'>Patient List</div>
                     <hr></hr>
-                    {patienList.map((item, index) => {
-                        return (<div className="list_item" key={index}>Name: {item.name} || Account: {item.patAddr}
+                    {patientList.map((item, index) => {
+                        return (<div className="list_item" key={index}>Name: {item[1]} || Account: {item[0]}
                         <div className='list_button'>
-                            <Button
-                                variant='warning'
-                                value={item}
-                                onClick={btnUpdateToggle}>Update</Button>
                             <Button 
-                                variant='danger'
-                                value={item}
-                                onClick={btnDeleteHandler}>Delete
+                                variant='warning'
+                                value={item.patAddr}
+                                onClick={btnDeleteHandler}>View
                             </Button>
                             </div>
                         </div>)

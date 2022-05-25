@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x94920A7BCd1D00c30e9Bc6BFb1089c595eA7bbd8"
+export const CONTRACT_ADDRESS = "0x8D5C414aab0480C8912171D52D17C9495CbfCE00"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -84,9 +84,26 @@ export const HEALTH_CARE_ABI = [
     "name": "addPatientData",
     "outputs": [
       {
-        "internalType": "bool",
+        "components": [
+          {
+            "internalType": "address",
+            "name": "patAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "age",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct HealthCare.Patient[]",
         "name": "",
-        "type": "bool"
+        "type": "tuple[]"
       }
     ],
     "stateMutability": "nonpayable",
@@ -223,13 +240,7 @@ export const HEALTH_CARE_ABI = [
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_doctorAddr",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "name": "getPatientList",
     "outputs": [
       {
