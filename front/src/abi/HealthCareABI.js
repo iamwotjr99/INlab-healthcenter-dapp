@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x8D5C414aab0480C8912171D52D17C9495CbfCE00"
+export const CONTRACT_ADDRESS = "0x08945a17aF765dbF4c898572EaDb0ad75142902a"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -207,6 +207,11 @@ export const HEALTH_CARE_ABI = [
         "internalType": "string",
         "name": "_description",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
       }
     ],
     "name": "updatePatientData",
@@ -226,6 +231,11 @@ export const HEALTH_CARE_ABI = [
         "internalType": "address",
         "name": "_patientAddr",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
       }
     ],
     "name": "deletePatientData",

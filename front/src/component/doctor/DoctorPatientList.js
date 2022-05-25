@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 
 import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 import DocPatientUpdate from './DocPatientUpdate';
+import DoctorViewTreatments from './DoctorViewTreatments';
 function DoctorPatientList() {
 
     const [patientList, setPatientList] = useState([]);
@@ -57,19 +58,25 @@ function DoctorPatientList() {
         setToggle(true);
     }
 
+    const btnView = (e) => {
+        setPatientAddr(e.target.value);
+        setToggle(e)
+    }
+
     return (
         <div className="doctor_patient_list">
-            {toggle ? <DocPatientUpdate setToggle={setToggle} patientAddr={patientAddr} account={account} contract={contract} /> : 
+            {toggle ? <DoctorViewTreatments setToggle={setToggle} patientAddr={patientAddr} account={account} contract={contract} /> : 
                 <div>
                     <div className='title'>Patient List</div>
                     <hr></hr>
                     {patientList.map((item, index) => {
-                        return (<div className="list_item" key={index}>Name: {item[1]} || Account: {item[0]}
+                        return (
+                        <div className="list_item" key={index}>Name: {item[1]} || Account: {item[0]}
                         <div className='list_button'>
                             <Button 
                                 variant='warning'
-                                value={item.patAddr}
-                                onClick={btnDeleteHandler}>View
+                                value={item[0]}
+                                onClick={btnView}>View
                             </Button>
                             </div>
                         </div>)

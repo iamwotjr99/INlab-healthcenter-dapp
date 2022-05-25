@@ -76,6 +76,11 @@
   padding-bottom: 30px;
 }
 
+.doctor .row .card {
+  max-height: 750px;
+  overflow: auto;
+}
+
 /* doctor search */
 .doctor_search {
   text-align: left;
@@ -107,6 +112,19 @@
   margin-left: auto;
 }
 
+/* doctor treatment */
+.doctor_treatment .btn_area {
+  margin-top: 10px;
+}
+
+.doctor_view_treatments .title img {
+  width: 32px;
+  height: 32px;
+  margin-right: 20px;
+}
+.doctor_view_treatments .title img:hover {
+  cursor:pointer;
+}
 /* patient sign up */
 .patient_sign_up {
   display: flex;

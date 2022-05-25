@@ -64,20 +64,6 @@ contract HealthCare {
         _symptom, _description, 0));
 
         patientList[msg.sender].push(Patient(_patientAddr, _patientName, _patientAge));
-        // for(uint i = 0; i < patientList[msg.sender].length; i++) {
-        //     uint same = 0;
-        //     if(i == 0) {
-        //         patientList[msg.sender].push(Patient(_patientAddr, _patientName, _patientAge));
-        //     }
-        //     for(uint j = 1; j <= patientList[msg.sender].length; j++) {
-        //         if(patientList[msg.sender][i].patAddr == patientList[msg.sender][j].patAddr) {
-        //               same++;
-        //         }
-        //     }
-        //     if(same == 0) {
-        //         patientList[msg.sender].push(Patient(_patientAddr, _patientName, _patientAge));
-        //     }
-        // }
         return patientList[msg.sender];
     }
 
@@ -88,40 +74,44 @@ contract HealthCare {
 
     // Update
     function updatePatientData(address _patientAddr, string memory _patientName, string memory _patientAge,
-    string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description)
+    string memory _patientWeight, string memory _patientHeight, string memory _symptom, string memory _description, uint index)
     public returns(bool) {
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
 
-        mediData[_patientAddr].patientAddr = _patientAddr;
-        mediData[_patientAddr].patientName = _patientName;
-        mediData[_patientAddr].patientAge = _patientAge;
-        mediData[_patientAddr].patientWeight = _patientWeight;
-        mediData[_patientAddr].patientHeight = _patientHeight;
-        mediData[_patientAddr].symptom = _symptom;
-        mediData[_patientAddr].description = _description;
+        treatments[_patientAddr][index].patientAddr = _patientAddr;
+        treatments[_patientAddr][index].patientName = _patientName;
+        treatments[_patientAddr][index].patientAge = _patientAge;
+        treatments[_patientAddr][index].patientWeight = _patientWeight;
+        treatments[_patientAddr][index].patientHeight = _patientHeight;
+        treatments[_patientAddr][index].symptom = _symptom;
+        treatments[_patientAddr][index].description = _description;
 
         return true;
     }
 
     // Delete
-    function deletePatientData(address _patientAddr) public returns(bool) {
+    function deletePatientData(address _patientAddr, uint index) public returns(bool) {
         require(keccak256(abi.encodePacked(userType[msg.sender])) == keccak256(abi.encodePacked("doctor")));
 
-        uint index;
+        uint patSize = patientList[msg.sender].length;
 
-        for(uint i = 0; i < patientList[msg.sender].length; i++) {
-            if(patientList[msg.sender][i].patAddr == _patientAddr) {
-                index = i;
-            }
-        }
-        uint size = patientList[msg.sender].length;
-        patientList[msg.sender][index] = patientList[msg.sender][size - 1];
-        for(uint i = index; i < patientList[msg.sender].length - 1; i++) {
+        patientList[msg.sender][index] = patientList[msg.sender][patSize - 1];
+
+        for(uint i = index; i < patSize - 1; i++) {
             patientList[msg.sender][i] = patientList[msg.sender][i + 1];
         }
 
         patientList[msg.sender].pop();
 
+        uint treatSize = treatments[_patientAddr].length;
+
+        treatments[_patientAddr][index] = treatments[_patientAddr][treatSize - 1];
+        
+        for(uint i = index; i < treatSize - 1; i++) {
+            treatments[_patientAddr][i] = treatments[_patientAddr][i + 1];
+        }
+
+        treatments[_patientAddr].pop();
         return true;
     }
 
