@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { Button, Form } from 'react-bootstrap'
 
-import {BUY_ABI, CONTRACT_ADDRESS} from '../abi/BuyABI';
+import {BUY_ABI, BUY_CONTRACT_ADDRESS} from '../abi/BuyABI';
 
 function SendEther() {
   const [web3, setWeb3] = useState();
@@ -20,7 +20,7 @@ function SendEther() {
       //const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
       setWeb3(web3);
 
-      const contract = new web3.eth.Contract(BUY_ABI, CONTRACT_ADDRESS);
+      const contract = new web3.eth.Contract(BUY_ABI, BUY_CONTRACT_ADDRESS);
       setContract(contract);
       console.log("contract: ", contract);
 

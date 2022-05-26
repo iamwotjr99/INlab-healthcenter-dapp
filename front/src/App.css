@@ -91,6 +91,11 @@
   margin-bottom: 5px;
 }
 
+.doctor_search .ether {
+  margin-bottom: 10px;
+  width: 100px ;
+}
+
 /* doctor patient list */
 .doctor_patient_list {
   text-align: left;
