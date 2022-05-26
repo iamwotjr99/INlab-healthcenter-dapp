@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x08945a17aF765dbF4c898572EaDb0ad75142902a"
+export const CONTRACT_ADDRESS = "0x036B950e07F269CF4B9329A0CDB38b89913787e8"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -25,6 +25,11 @@ export const HEALTH_CARE_ABI = [
         "internalType": "address",
         "name": "doctorAddr",
         "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
       },
       {
         "internalType": "string",
@@ -78,6 +83,26 @@ export const HEALTH_CARE_ABI = [
       {
         "internalType": "string",
         "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_doctorAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_doctorName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_hospital",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_createdAt",
         "type": "string"
       }
     ],
@@ -157,9 +182,29 @@ export const HEALTH_CARE_ABI = [
             "type": "string"
           },
           {
-            "internalType": "uint256",
-            "name": "state",
-            "type": "uint256"
+            "internalType": "string",
+            "name": "doctorName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "hospital",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "doctorAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "createdAt",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "updatedAt",
+            "type": "string"
           }
         ],
         "internalType": "struct HealthCare.MedicalForm",
@@ -209,6 +254,11 @@ export const HEALTH_CARE_ABI = [
         "type": "string"
       },
       {
+        "internalType": "string",
+        "name": "_updateAt",
+        "type": "string"
+      },
+      {
         "internalType": "uint256",
         "name": "index",
         "type": "uint256"
@@ -227,6 +277,11 @@ export const HEALTH_CARE_ABI = [
   },
   {
     "inputs": [
+      {
+        "internalType": "address",
+        "name": "_doctorAddr",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "_patientAddr",
@@ -250,7 +305,13 @@ export const HEALTH_CARE_ABI = [
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_doctorAddr",
+        "type": "address"
+      }
+    ],
     "name": "getPatientList",
     "outputs": [
       {
@@ -357,12 +418,69 @@ export const HEALTH_CARE_ABI = [
             "type": "string"
           },
           {
-            "internalType": "uint256",
-            "name": "state",
-            "type": "uint256"
+            "internalType": "string",
+            "name": "doctorName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "hospital",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "doctorAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "createdAt",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "updatedAt",
+            "type": "string"
           }
         ],
         "internalType": "struct HealthCare.MedicalForm[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_patientAddr",
+        "type": "address"
+      }
+    ],
+    "name": "getDoctorList",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "docAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "hospital",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct HealthCare.Doctor[]",
         "name": "",
         "type": "tuple[]"
       }

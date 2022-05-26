@@ -1,11 +1,14 @@
 import Web3 from 'web3';
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 import Header from '../Header';
 function DoctorSignUp() {
+    const navigate = useNavigate();
     const [doctorData, setDoctorData] = useState({
         docAddr: "",
+        name: "",
         hospital: "",
     });
 
@@ -37,10 +40,11 @@ function DoctorSignUp() {
     }
 
     const signUpHandler = async () => {
-        await contract.methods.addDoctor(doctorData.docAddr, doctorData.hospital).send({
+        await contract.methods.addDoctor(doctorData.docAddr, doctorData.name, doctorData.hospital).send({
             from: doctorData.docAddr
         }).then((error, result) => {
             console.log(result);
+            navigate(-1);
         });
     }
 
@@ -52,6 +56,11 @@ function DoctorSignUp() {
                     <Form.Group className='mb-3' controlId="doctor_address">
                         <Form.Label>Your address</Form.Label>
                         <Form.Control type="text" name="docAddr" value={doctorData.docAddr} onChange={changeHandler}/>
+                    </Form.Group>
+
+                    <Form.Group className='mb-3' controlId="name">
+                        <Form.Label>Your name</Form.Label>
+                        <Form.Control type="text" name="name" value={doctorData.name} onChange={changeHandler}/>
                     </Form.Group>
 
                     <Form.Group className='mb-3' controlId="hospital_name">

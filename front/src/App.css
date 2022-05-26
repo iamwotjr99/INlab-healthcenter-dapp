@@ -132,3 +132,37 @@
   justify-content: center;
   margin-top: 10px;
 }
+
+/* patient */
+.patient .row .card {
+  max-height: 750px;
+  overflow: auto;
+}
+
+.patient_right {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* patient treatments */
+
+.patient_treatments {
+  text-align: left;
+}
+
+.patient_treatments .title {
+  font-size: 1.25em;
+  margin-bottom: 5px;
+}
+
+/* patient doctor list */
+.patient_doctor_list {
+  text-align: left;
+}
+
+.patient_doctor_list .title {
+  font-size: 1.25em;
+  margin-bottom: 5px;
+}

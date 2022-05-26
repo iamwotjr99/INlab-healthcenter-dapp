@@ -11,20 +11,22 @@ function DoctorForm ({userAddr}) {
         height: "",
         symptom: "",
         description: "",
+        doctorName: "",
+        hospital: "",
     });
 
-    const [web3, setWeb3] = useState();
     const [contract, setContract] = useState();
+    const [account, setAccount] = useState();
 
     useEffect(() => {
         async function init() {
             const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
-            setWeb3(web3);
 
             const contract = new web3.eth.Contract(HEALTH_CARE_ABI, CONTRACT_ADDRESS);
             setContract(contract);
 
             const account = await web3.eth.requestAccounts();
+            setAccount(account[0]);
             console.log("account: ", account);
         }
         init();
@@ -39,9 +41,14 @@ function DoctorForm ({userAddr}) {
     }
 
     const btnAddData = async () => {
+        const today = new Date();
+        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        const time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        const dateTime = date+' '+time;
         await contract.methods.addPatientData(formData.address, formData.name,
             formData.age, formData.weight, formData.height, formData.symptom,
-            formData.description).send({
+            formData.description, account, formData.doctorName, formData.hospital
+            , dateTime).send({
                 from: userAddr
             }).then(async (result) => {
                 console.log("success");
@@ -57,6 +64,8 @@ function DoctorForm ({userAddr}) {
             height: "",
             symptom: "",
             description: "",
+            doctorName: "",
+            hospital: "",
         })
     }
 
@@ -98,6 +107,16 @@ function DoctorForm ({userAddr}) {
                     <Form.Control type="text" name="description" as="textarea" 
                     value={formData.description}
                     rows={3} onChange={changeHandler}/>
+                </Form.Group>
+
+                <Form.Group className='mb-3' controlId="doctorName">
+                    <Form.Label>Doctor name</Form.Label>
+                    <Form.Control type="text" name="doctorName" value={formData.doctorName} onChange={changeHandler}/>
+                </Form.Group>
+
+                <Form.Group className='mb-3' controlId="hospital">
+                    <Form.Label>Hospital</Form.Label>
+                    <Form.Control type="text" name="hospital" value={formData.hospital} onChange={changeHandler}/>
                 </Form.Group>
             </Form>
             <Button variant="warning" onClick={btnAddData}>Create</Button>

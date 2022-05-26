@@ -26,7 +26,7 @@ function DoctorPatientList() {
             console.log(account[0]);
 
             setPatientList([]);
-            const array = await contract.methods.getPatientList().call();
+            const array = await contract.methods.getPatientList(account[0]).call();
             // const dumpArr = [];
             // array.forEach((item) => {
             //     dumpArr.push(item.patAddr);
@@ -46,17 +46,6 @@ function DoctorPatientList() {
         init();
     }, [count])
 
-    const btnDeleteHandler = async (e) => {
-        const deletePatientAddr = e.target.value;
-        await contract.methods.deletePatientData(deletePatientAddr).send({
-            from: account
-        }).then(setCount(count + 1));
-    }
-
-    const btnUpdateToggle = (e) => {
-        setPatientAddr(e.target.value);
-        setToggle(true);
-    }
 
     const btnView = (e) => {
         setPatientAddr(e.target.value);

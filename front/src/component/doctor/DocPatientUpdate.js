@@ -33,9 +33,13 @@ function DocPatientUpdate({ setToggle, patientAddr, contract, index, treat, acco
     }
 
     const btnUpdateHandler = async () => {
+        const today = new Date();
+        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        const time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        const dateTime = date+' '+time;
         await contract.methods.updatePatientData(patientAddr, formData.name,
             formData.age, formData.weight, formData.height, formData.symptom,
-            formData.description, index).send({from: account}).then(setToggle(false));
+            formData.description, dateTime, index).send({from: account}).then(setToggle(false));
     }
 
     return (
