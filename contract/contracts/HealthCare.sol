@@ -77,10 +77,6 @@ contract HealthCare {
         return patientList[_doctorAddr];
     }
 
-    // Read
-    function readPatientData(address _patientAddr) public view returns(MedicalForm memory) {
-        return treatments[_patientAddr][0];
-    }
 
     // Update
     function updatePatientData(address _patientAddr, string memory _patientName, string memory _patientAge,

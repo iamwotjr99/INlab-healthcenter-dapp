@@ -20,19 +20,19 @@ function DoctorTreatment({setIndex, setToggle, setTreatment, treat, propIndex, a
     return(
         <div className="doctor_treatment">
             <hr></hr>
-            <div className='id'>id: {propIndex}</div>
-            <div className="address">address: {treat.patientAddr}</div>
-            <div className="name">name: {treat.patientName}</div>
-            <div className="age">age: {treat.patientAge}</div>
-            <div className="weight">weight: {treat.patientWeight}</div>
-            <div className="height">height: {treat.patientHeight}</div>
-            <div className="symptom">symptom: {treat.symptom}</div>
-            <div className="description">description: {treat.description}</div>
-            <div className="doctorAccount">doctorAddress: {treat.doctorAddr}</div>
-            <div className="doctorName">doctor: {treat.doctorName}</div>
-            <div className="hospital">hospital: {treat.hospital}</div>
-            <div className='createdAt'>createdAt: {treat.createdAt}</div>
-            {treat.updatedAt ? <div className='updatedAt'>updatedAt: {treat.updatedAt}</div>:
+            <div className='id'>PHR ID: {propIndex}</div>
+            <div className="address">Address: {treat.patientAddr}</div>
+            <div className="name">Name: {treat.patientName}</div>
+            <div className="age">Age: {treat.patientAge}</div>
+            <div className="weight">Weight: {treat.patientWeight}</div>
+            <div className="height">Height: {treat.patientHeight}</div>
+            <div className="symptom">Symptom: {treat.symptom}</div>
+            <div className="description">Description: {treat.description}</div>
+            <div className="doctorAccount">DoctorAddress: {treat.doctorAddr}</div>
+            <div className="doctorName">Doctor: {treat.doctorName}</div>
+            <div className="hospital">Hospital: {treat.hospital}</div>
+            <div className='createdAt'>CreatedAt: {treat.createdAt}</div>
+            {treat.updatedAt ? <div className='updatedAt'>UpdatedAt: {treat.updatedAt}</div>:
             <></>}
             <div className='btn_area'>
                 <Button 
