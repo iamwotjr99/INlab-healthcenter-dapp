@@ -5,7 +5,7 @@ import Main from './component/Main';
 import SendEther from './component/SendEther';
 import DoctorSignUp from './component/doctor/DoctorSignUp';
 import DoctorForm from './component/doctor/DoctorForm';
-import PatientSignUp from './component/PatientSignUp';
+import PatientSignUp from './component/patient/PatientSignUp';
 function App() {
 
   return (

@@ -1,7 +1,7 @@
 import {Tab, Row, Col, ListGroup, Card} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
-import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../abi/HealthCareABI';
+import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../../abi/HealthCareABI';
 import PatientRight from './PatientRight';
 function Patient() {
     const [listKey, setListKey] = useState();
@@ -32,15 +32,11 @@ function Patient() {
                         <ListGroup>
                             <ListGroup.Item action eventKey={0}
                             value="0" variant="warning" onClick={onClickHandler}>
-                                Patient Form
+                                Treatment list
                             </ListGroup.Item>
                             <ListGroup.Item action eventKey={1}
                             value="1" variant="warning" onClick={onClickHandler}>
-                                Patient Data Search
-                            </ListGroup.Item>
-                            <ListGroup.Item action eventKey={2}
-                            value="2" variant="warning" onClick={onClickHandler}>
-                                Patient List
+                                Personal doctor list
                             </ListGroup.Item>
                         </ListGroup>
                     </Col>

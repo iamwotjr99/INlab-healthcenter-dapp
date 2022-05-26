@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Web3 from 'web3';
-import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
+import {HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 function PatientSearch() {
     const [contract, setContract] = useState();
     const [account ,setAccount] = useState();

@@ -5,7 +5,7 @@ import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../abi/HealthCareABI';
 import SignUp from './SignUp';
 import Doctor from './doctor/Doctor';
 import Header from './Header';
-import Patient from './Patient';
+import Patient from './patient/Patient';
 function Main() {
     const [userAddr, setUserAddr] = useState();
     const [userType, setUserType] = useState();

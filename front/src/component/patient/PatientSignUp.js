@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Web3 from 'web3';
-import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../abi/HealthCareABI';
-import Header from './Header';
+import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../../abi/HealthCareABI';
+import Header from '../Header';
 function PatientSignUp() {
     const [contract, setContract] = useState();
     const [patient, setPatient] = useState({
