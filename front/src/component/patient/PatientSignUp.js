@@ -2,8 +2,10 @@ import {useState, useEffect} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Web3 from 'web3';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../../abi/HealthCareABI';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 function PatientSignUp() {
+    const navigate = useNavigate();
     const [contract, setContract] = useState();
     const [patient, setPatient] = useState({
         patAddr: "",
@@ -38,7 +40,9 @@ function PatientSignUp() {
 
     const signUpHandler = async () => {
         await contract.methods.addPatient(patient.patAddr, patient.name, patient.age).send({from: patient.patAddr})
-        .then(console.log);
+        .then(()=>{
+            navigate(-1);
+        });
     }
     return (<div className="patient_sign_up_container">
         <Header />

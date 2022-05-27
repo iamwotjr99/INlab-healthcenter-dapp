@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x036B950e07F269CF4B9329A0CDB38b89913787e8"
+export const CONTRACT_ADDRESS = "0xfC00D91D3884Cd89366f66A62881e484093E1114"
 
 export const HEALTH_CARE_ABI = [
   {
@@ -133,88 +133,6 @@ export const HEALTH_CARE_ABI = [
     ],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_patientAddr",
-        "type": "address"
-      }
-    ],
-    "name": "readPatientData",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "patientAddr",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "patientName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "patientAge",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "patientWeight",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "patientHeight",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "symptom",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "doctorName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "hospital",
-            "type": "string"
-          },
-          {
-            "internalType": "address",
-            "name": "doctorAddr",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "createdAt",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "updatedAt",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct HealthCare.MedicalForm",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
   },
   {
     "inputs": [
