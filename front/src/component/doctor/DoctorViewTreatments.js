@@ -30,7 +30,7 @@ function DoctorViewTreatments({setToggle, patientAddr, account, contract}) {
             contract={contract} index={index} treat={treatment} account={account} /> : <div className="doctor_view_treatments">
             {treats && <div className='title'>
                 <img src={btnBack} alt="btn_back" onClick={btnBackHandler}/>
-                {treats[0].patientName}'s treatments
+                Patient treatments
                 </div>}
             {treats && treats.map((item, index) => {
                 return <DoctorTreatment key={index} setIndex={setIndex} setToggle={setUpdateToggle} setTreatment={setTreatment}

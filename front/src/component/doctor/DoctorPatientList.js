@@ -27,13 +27,7 @@ function DoctorPatientList() {
 
             setPatientList([]);
             const array = await contract.methods.getPatientList(account[0]).call();
-            // const dumpArr = [];
-            // array.forEach((item) => {
-            //     dumpArr.push(item.patAddr);
-            // })
-            // const set = new Set(dumpArr);
-            // const accountArr = [...set];
-            // console.log("result: ", accountArr);
+            
             const map = new Map();
             for(const item of array) {
                 map.set(JSON.stringify(item.patAddr, item.name), [item.patAddr, item.name]);
@@ -44,7 +38,7 @@ function DoctorPatientList() {
         }
 
         init();
-    }, [count])
+    }, [])
 
 
     const btnView = (e) => {

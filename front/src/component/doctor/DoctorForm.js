@@ -1,4 +1,6 @@
 import Web3 from 'web3';
+import axios from 'axios';
+
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
@@ -13,10 +15,19 @@ function DoctorForm ({userAddr}) {
         description: "",
         doctorName: "",
         hospital: "",
+        createdAt: "",
     });
 
     const [contract, setContract] = useState();
     const [account, setAccount] = useState();
+
+    const postFormData = async () => {
+         axios.post("/doctor/postformdata", {
+            body: formData,
+         }).then((res) => {
+            console.log("from server: ", res);
+        })
+    }
 
     useEffect(() => {
         async function init() {
@@ -45,16 +56,21 @@ function DoctorForm ({userAddr}) {
         const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         const time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
         const dateTime = date+' '+time;
-        await contract.methods.addPatientData(formData.address, formData.name,
-            formData.age, formData.weight, formData.height, formData.symptom,
-            formData.description, account, formData.doctorName, formData.hospital
-            , dateTime).send({
-                from: userAddr
-            }).then(async (result) => {
-                console.log("success");
-                console.log(result);
-                console.log("-------");
-            });
+        setFormData({
+            ...formData,
+            createdAt: dateTime,
+        });
+        postFormData();
+        // await contract.methods.addPatientData(formData.address, formData.name,
+        //     formData.age, formData.weight, formData.height, formData.symptom,
+        //     formData.description, account, formData.doctorName, formData.hospital
+        //     , dateTime).send({
+        //         from: userAddr
+        //     }).then(async (result) => {
+        //         console.log("success");
+        //         console.log(result);
+        //         console.log("-------");
+        //     });
         setFormData({
             ...formData,
             address: "",

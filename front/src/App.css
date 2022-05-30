@@ -171,3 +171,21 @@
   font-size: 1.25em;
   margin-bottom: 5px;
 }
+
+
+
+
+
+
+
+
+/* fhir test */
+.fhir_test {
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+}
+
+.fhir_test .fhir_test_box Form{
+  margin-bottom: 20px;
+}
