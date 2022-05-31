@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS } from '../../abi/HealthCareABI';
 import PatientRight from './PatientRight';
-function Patient() {
+function Patient({userAddr}) {
     const [listKey, setListKey] = useState();
     const [contract, setContract] = useState();
     const [account, setAccount] = useState();
@@ -42,7 +42,7 @@ function Patient() {
                     </Col>
                     <Col sm={8}>
                         <Card>
-                            <PatientRight contract={contract} listKey={listKey} account={account}/>
+                            <PatientRight contract={contract} listKey={listKey} account={userAddr}/>
                         </Card>
                     </Col>
                 </Row>

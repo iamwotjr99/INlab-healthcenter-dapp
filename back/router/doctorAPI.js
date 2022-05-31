@@ -8,7 +8,6 @@ router.get('/hello', (req, res) => {
 
 router.post('/postformdata', (req, res) => {
     console.log(req.body);
-    console.log(req.createdAt);
     res.sendStatus(200);
 })
 

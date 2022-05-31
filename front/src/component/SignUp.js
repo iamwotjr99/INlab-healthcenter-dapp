@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import doctorImg from '../image/img_doctor.png';
 import patientImg from '../image/img_patient.png';
-function SignUp () {
+function SignUp ({ setUserAddr }) {
     const navigate = useNavigate();
 
     // const moveToSendEther = () => {
@@ -25,6 +25,7 @@ function SignUp () {
             const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
 
             const account = await web3.eth.requestAccounts();
+            setUserAddr(account[0]);
             console.log("account: ", account);
         }
         init();

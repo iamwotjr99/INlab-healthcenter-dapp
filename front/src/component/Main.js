@@ -31,7 +31,7 @@ function Main() {
       <div className='main'>
         {userType == "doctor" ? <Doctor userAddr={userAddr} userType={userType} /> :
          userType == "patient" ? <Patient userAddr={userAddr} userType={userType} /> : 
-          <SignUp/>}
+          <SignUp setUserAddr={setUserAddr}/>}
       </div>
     </div>
   );
