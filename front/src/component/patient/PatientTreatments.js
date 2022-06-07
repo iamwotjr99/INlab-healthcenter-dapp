@@ -26,7 +26,7 @@ function PatientTreatments({account}) {
 
     useEffect(() => {
         getTreatments();
-        if(account != undefined ) {
+        if(account !== undefined ) {
             getPatientData();
         }
     }, [])

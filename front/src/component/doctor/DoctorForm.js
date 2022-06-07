@@ -12,8 +12,6 @@ function DoctorForm ({userAddr}) {
         name: "",
         age: "",
         telecome: {
-            work: "",
-            home: "",
             myPhone: "",
         },
         gender: "",
@@ -46,7 +44,7 @@ function DoctorForm ({userAddr}) {
                 {
                     "use": "usual",
                     "assigner": {
-                        "display": formData.assigner
+                        "display": formData.assigner,
                     }
                 }
             ],
@@ -65,16 +63,6 @@ function DoctorForm ({userAddr}) {
             "telecom": [
                 {
                     "system": "phone",
-                    "value": formData.telecome.work,
-                    "use": "work"
-                },
-                {
-                    "system": "phone",
-                    "value": formData.telecome.home,
-                    "use": "home"
-                },
-                {
-                    "system": "phone",
                     "value": formData.telecome.myPhone,
                     "use": "mobile"
                 }
@@ -91,10 +79,11 @@ function DoctorForm ({userAddr}) {
                         "text": formData.contact.name
                     },
                     "gender": formData.contact.gender,
-                    "telecome": [
+                    "telecom": [
                         {
                             "system": "phone",
-                            "value": formData.contact.phone
+                            "value": formData.contact.phone,
+                            "use": "mobile"
                         }
                     ],
                     "address": [
@@ -117,8 +106,19 @@ function DoctorForm ({userAddr}) {
                 {
                     "url": "doctor",
                     "valueString": formData.doctorName
+                },
+                {
+                    "url": "doctorAddr",
+                    "valueString": userAddr
+                },
+                {
+                    "url": "age",
+                    "valueString": formData.age
                 }
-            ]
+            ],
+            "generalPractitioner": {
+                "reference": `Practitioner/${userAddr}`
+            }
          }).then((res) => {
             console.log("from server: ", res);
         })
@@ -192,8 +192,6 @@ function DoctorForm ({userAddr}) {
             name: "",
             age: "",
             telecome: {
-                work: "",
-                home: "",
                 myPhone: "",
             },
             gender: "",
@@ -246,15 +244,6 @@ function DoctorForm ({userAddr}) {
                     <Form.Control type="text" name="address" value={formData.address} onChange={changeHandler}/>
                 </Form.Group>
 
-                Telecome
-                <Form.Group className='mb-3' controlId="telecome.work">
-                    <Form.Label>Work</Form.Label>
-                    <Form.Control type="text" name="work" value={formData.telecome.work} onChange={telChangeHandler}/>
-                </Form.Group>
-                <Form.Group className='mb-3' controlId="telecome.home">
-                    <Form.Label>Home</Form.Label>
-                    <Form.Control type="text" name="home" value={formData.telecome.home} onChange={telChangeHandler}/>
-                </Form.Group>
                 <Form.Group className='mb-3' controlId="telecome.myPhone">
                     <Form.Label>My Phone</Form.Label>
                     <Form.Control type="text" name="myPhone" value={formData.telecome.myPhone} onChange={telChangeHandler}/>

@@ -2,9 +2,12 @@ import Web3 from 'web3';
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import { HEALTH_CARE_ABI, CONTRACT_ADDRESS} from '../../abi/HealthCareABI';
 import Header from '../Header';
 function DoctorSignUp() {
+    const BASE_URL = "http://203.247.240.226:8080/fhir"
     const navigate = useNavigate();
     const [doctorData, setDoctorData] = useState({
         docAddr: "",
@@ -13,6 +16,16 @@ function DoctorSignUp() {
     });
 
     const [contract, setContract] = useState();
+
+    async function doctorLogin() {
+        await axios.put(`${BASE_URL}/Practitioner/${doctorData.docAddr}`, {
+            "resourceType": "Practitioner",
+            "id": doctorData.docAddr,
+            "name": doctorData.name
+        }).then((res) => {
+            console.log(res);
+        })
+    }
 
     useEffect(() => {
         async function init() {
@@ -40,6 +53,7 @@ function DoctorSignUp() {
     }
 
     const signUpHandler = async () => {
+        doctorLogin();
         await contract.methods.addDoctor(doctorData.docAddr, doctorData.name, doctorData.hospital).send({
             from: doctorData.docAddr
         }).then((error, result) => {
