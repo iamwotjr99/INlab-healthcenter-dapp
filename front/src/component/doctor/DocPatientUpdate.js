@@ -116,7 +116,7 @@ function DocPatientUpdate({ setToggle, patientAddr, contract, index, treat, acco
             }
         }).then((res) => {
             console.log(res);
-            setToggle(false);
+            setToggle(false)
         })
     } 
 

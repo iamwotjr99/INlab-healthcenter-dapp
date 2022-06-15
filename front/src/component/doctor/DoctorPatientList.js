@@ -18,22 +18,13 @@ function DoctorPatientList({userAddr}) {
     async function getPatientData() {
         //console.log(userAddr);
         await axios.get(`${BASE_URL}/Patient?general-practitioner=${userAddr}`).then((res) => {
-            //console.log(res.data.entry);
             for(const item of res.data.entry) {
                 if(item.resource.meta.tag !== undefined) {
-                    //console.log(item.resource.id, "i'm duplicate")
                     continue;
                 } else {
                     setPatientList([...patientList, item]);
                 }
             }
-            // if(res.data.entry !== undefined) {
-            //     for(let i = 0; i < res.data.entry.length; i = i + 2) {
-            //         setPatientList([...patientList, res.data.entry[i]]);
-            //     }
-            // } else {
-            //     console.log("entry is empty")
-            // }
         });
     } 
 

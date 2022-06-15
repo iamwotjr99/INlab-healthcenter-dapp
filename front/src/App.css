@@ -1,5 +1,12 @@
+html, body {
+  height: 100%;
+}
+#root {
+  height: 100%;
+}
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App .container {
@@ -173,12 +180,6 @@
 }
 
 
-
-
-
-
-
-
 /* fhir test */
 .fhir_test {
   display: flex;
@@ -188,4 +189,69 @@
 
 .fhir_test .fhir_test_box Form{
   margin-bottom: 20px;
+}
+
+
+/* user header */
+.user {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.user_header .container{
+  margin-top: 10px;
+  margin-left: 5%;
+}
+
+.user_header .container > .navbar-brand {
+  font-size: 1.4rem;
+}
+
+.user_header .dropdown {
+  margin-right: 5%;
+}
+
+.user_header .drop_btn {
+  background-color: white;
+  border-color: #34ce57;
+  color: #34ce57;
+  font-size: 1.2rem;
+}
+
+.user .login_container {
+  display: flex;
+  flex-direction: row;
+  background-color: #e2e6ea;
+  flex-grow: 1;
+}
+
+.user .login_container > .item_login {
+  width: 50%;
+  text-align: left;
+  margin-top : 10%;
+}
+
+.user .login_container > .item_login > .login_form {
+  width: 50%;
+  margin-left: 20%;
+  font-size: 1.1rem;
+}
+
+.user .login_container > .item_login > .login_form > span {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 5%;
+}
+
+.user .login_container > .item_login > .login_form > Button {
+  width: 100%;
+}
+.user .login_container > .item_img {
+  width: 50%;
+  margin-right: 3%;
+  margin-top : 10%;
+}
+.user .login_container > .item_img > img {
+  width: 100%;
 }

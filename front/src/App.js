@@ -7,6 +7,8 @@ import DoctorSignUp from './component/doctor/DoctorSignUp';
 import DoctorForm from './component/doctor/DoctorForm';
 import PatientSignUp from './component/patient/PatientSignUp';
 import FHIRTest from './component/FHIRTest';
+import User from './component/user/User';
+import Hospital from './component/user/Hospital';
 function App() {
 
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/doctorform" element={<DoctorForm />} />
         <Route path="/patientsignup" element={<PatientSignUp />} />
         <Route path="/posttest" element={<FHIRTest />} />
+        <Route path="/user" element={<User />} />
+        <Route path='/hospital' element={<Hospital />} />
       </Routes>
     </div>
     </BrowserRouter>
