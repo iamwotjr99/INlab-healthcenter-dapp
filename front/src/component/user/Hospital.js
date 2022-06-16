@@ -1,9 +1,20 @@
 import axios from 'axios';
-import Header from '../user/userHeader';
+import SideMenu from './SideMenu';
+import Header from './userHeader';
+import { useState } from 'react';
 function Hospital() {
+    const BASE_URL = "http://203.247.240.226:8080/fhir"
+
+    const [state, setState] = useState(0);
+
     return (
         <div className="hospital">
             <Header />
+            <div className='hospital_main'>
+                <div className='hospital_content'>
+                    <SideMenu setState={setState}/>
+                </div>
+            </div>
         </div>
     )
 }
