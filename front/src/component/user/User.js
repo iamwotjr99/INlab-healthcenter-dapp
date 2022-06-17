@@ -1,11 +1,27 @@
-import { Nav, Container, Navbar, Form, Button, Dropdown } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import banner from '../../image/banner.jpg'
 import Header from '../user/userHeader'
 function User() {
     const navigate = useNavigate();
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+
+    });
+
+    const onChangeHandler = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+        })
+    }
     const onClickBtn = () => {
-        navigate('/hospital');
+        if(user.email === "HospitalA") {
+            navigate('/hospital', {state: user.email});
+        }
     }
     return (
         <div className='user'>
@@ -16,7 +32,7 @@ function User() {
                         <span>Sign in</span>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="text" placeholder="Enter email" value={user.email} name="email" onChange={onChangeHandler}/>
                             <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
                             </Form.Text>
@@ -24,7 +40,7 @@ function User() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" value={user.password}name="password" onChange={onChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out" />

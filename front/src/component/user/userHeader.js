@@ -1,5 +1,5 @@
 import { Nav, Container, Navbar, Dropdown } from 'react-bootstrap';
-function userHeader() {
+function userHeader( {state} ) {
     return (
         <div className='user_header'>
                 <Navbar variant="light">
@@ -10,7 +10,7 @@ function userHeader() {
                     </Container>
                     <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic" className='drop_btn'>
-                            Sign up
+                            SignUp
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>

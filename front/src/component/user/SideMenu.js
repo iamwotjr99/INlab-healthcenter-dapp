@@ -13,13 +13,13 @@ function SideMenu({setState}) {
 
     return(
         <div className='side_menu'>
-            <nav class="main-menu">
+            <nav className="main-menu">
                 <ul>
                     {menu.map((item, index) => {
                         return (
                             <li key={index} onClick={e => onClickBtn(e, index)}>
                                 <a href="#">
-                                    <i class={item.icon} ></i>
+                                    <i className={item.icon} ></i>
                                     <span className='nav-text'>
                                         {item.name}
                                     </span>
