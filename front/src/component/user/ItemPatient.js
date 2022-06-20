@@ -1,23 +1,21 @@
+import { Button } from 'react-bootstrap';
 function ItemPatient({patients}) {
     return (
         <div className="patient_list_container">
-            {patients.map((item, index) => {
+            {patients && patients.map((item, index) => {
+                {console.log(patients.length)}
                     return (
                         <div className='item_patient' key={index}>
                             <div className='name'>
-                                {item.resource.name[0].text}
+                                PID: {item.resource.id}
                             </div>
-                            <div className='age_gender'>
-                                <div className='age'>
-                                    {item.resource.extension[4].valueString}
-                                </div>
-                                <div className='gender'>
-                                    {item.resource.gender}
-                                </div>
+                            <div className='doctor'>
+                                {item.resource.extension[2].valueString}
                             </div>
                             <div className='address'>
-                                {item.resource.address[0].text}
+                                {item.resource.extension[3].valueString}
                             </div>
+                            <Button variant="outline-success">View</Button>
                         </div>
                     )
                 })}

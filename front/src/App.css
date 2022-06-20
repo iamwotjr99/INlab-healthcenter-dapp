@@ -425,7 +425,6 @@ nav ul,nav li {
 
 .hospital_info_container {
   background-color: white;
-  height: 20vh;
   margin: 2% 2% 2% 2%;
   padding: 1.5% 1.5% 1.5% 1.5%;
   border-radius: 10px;
@@ -442,12 +441,10 @@ nav ul,nav li {
 
 .patient_list_container {
   margin: 0% 2% 2% 2%;
-  height: 80vh;;
 }
 
 .patient_list_container > .item_patient {
   margin: 2% 2% 2% 2%;
-  height: 15vh;
   background-color: white;
   border-radius: 10px;
   padding: 1.5% 1.5% 1.5% 1.5%;
@@ -457,15 +454,8 @@ nav ul,nav li {
   font-size: 1.3rem;
 }
 
-.patient_list_container > .item_patient > .age_gender {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-
-.patient_list_container > .item_patient > .age_gender > .age {
-  margin-right: 1%;
+.patient_list_container > .item_patient > .address {
+  margin-bottom: 1%;
 }
 
 /* Hospital PHR */

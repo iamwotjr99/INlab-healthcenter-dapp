@@ -102,8 +102,8 @@ function HospitalSendPHR() {
                    "valueString": formData.doctorName
                },
                {
-                   "url": "doctorAddr",
-                   "valueString": "1"
+                   "url": "assigner",
+                   "valueString": formData.assigner
                },
                {
                    "url": "age",
