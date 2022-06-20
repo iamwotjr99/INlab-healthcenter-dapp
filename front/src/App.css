@@ -415,6 +415,59 @@ nav ul,nav li {
   overflow: auto;
 }
 
+/* Hospital patients */
+.hospital_patients {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hospital_info_container {
+  background-color: white;
+  height: 20vh;
+  margin: 2% 2% 2% 2%;
+  padding: 1.5% 1.5% 1.5% 1.5%;
+  border-radius: 10px;
+}
+
+.hospital_info_container > .title {
+  font-size: 1.4rem;
+}
+
+.hospital_info_container > .address {
+  margin-top: 1%;
+  margin-bottom: 5px
+}
+
+.patient_list_container {
+  margin: 0% 2% 2% 2%;
+  height: 80vh;;
+}
+
+.patient_list_container > .item_patient {
+  margin: 2% 2% 2% 2%;
+  height: 15vh;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5% 1.5% 1.5% 1.5%;
+}
+
+.patient_list_container > .item_patient > .name {
+  font-size: 1.3rem;
+}
+
+.patient_list_container > .item_patient > .age_gender {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.patient_list_container > .item_patient > .age_gender > .age {
+  margin-right: 1%;
+}
+
 /* Hospital PHR */
 .hospital_send_phr {
   display: flex;
@@ -489,3 +542,4 @@ nav ul,nav li {
   margin-left: auto;
   width: 10%;
 }
+
