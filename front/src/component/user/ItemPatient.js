@@ -2,8 +2,8 @@ import { Button } from 'react-bootstrap';
 function ItemPatient({patients}) {
     return (
         <div className="patient_list_container">
+            {console.log(patients.length)}
             {patients && patients.map((item, index) => {
-                {console.log(patients.length)}
                     return (
                         <div className='item_patient' key={index}>
                             <div className='name'>

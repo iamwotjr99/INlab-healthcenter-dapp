@@ -8,14 +8,16 @@ function HospitalPatients() {
     const [patientList, setPatientsList] = useState([]);
 
     async function getPatients() {
-        let temp;
+        let temp = [];
         await axios.get(`${BASE_URL}/Patient?organization=INLab`).then((res) => {
             for(const item of res.data.entry) {
                 if(item.resource.meta.tag == undefined) {
                     console.log(item);
-                    setPatientsList([...patientList, item]);
+                    temp.push(item);
                 } 
             }
+            console.log("temp:", temp);
+            setPatientsList(temp);
         });
     }
 
