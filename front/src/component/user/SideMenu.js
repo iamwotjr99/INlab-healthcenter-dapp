@@ -1,6 +1,6 @@
 function SideMenu({setState}) {
     const menu = [
-        {icon: "fa fa-soild fa-file-circle-check", name: "Patients"},
+        {icon: "fa fa-soild fa-hospital-user", name: "Patients"},
         {icon: "fa fa-solid fa-file-import", name: "Send PHR"},
         {icon: "fa fa-solid fa-gear", name: "Setting"}
     ]

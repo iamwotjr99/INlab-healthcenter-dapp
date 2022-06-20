@@ -11,7 +11,6 @@ function Hospital() {
 
     return (
         <div className="hospital">
-            {console.log(location.state)}
             <Header prop={location.state}/>
             <div className='hospital_main'>
                 <div className='hospital_content'>
