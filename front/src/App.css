@@ -458,6 +458,10 @@ nav ul,nav li {
   margin-bottom: 1%;
 }
 
+.patient_list_container > .item_patient > .createdAt {
+  margin-bottom: 1%;
+}
+
 /* Hospital PHR */
 .hospital_send_phr {
   display: flex;

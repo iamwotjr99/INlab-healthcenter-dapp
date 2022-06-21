@@ -2,8 +2,8 @@ import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import banner from '../../image/banner.jpg'
-import Header from '../user/userHeader'
+import banner from '../../image/banner.jpg';
+import Header from './UserHeader.js';
 function User() {
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -20,7 +20,7 @@ function User() {
     }
     const onClickBtn = () => {
         if(user.email === "HospitalA") {
-            navigate('/hospital', {state: user.email});
+            navigate(`/hospital/${user.email}`, {id: user.email});
         }
     }
     return (
@@ -45,7 +45,7 @@ function User() {
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out" />
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={onClickBtn}>
+                        <Button variant="primary" type="button" onClick={onClickBtn}>
                             Sign in
                         </Button>
                     </Form>

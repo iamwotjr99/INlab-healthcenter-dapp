@@ -2,7 +2,6 @@ import { Button } from 'react-bootstrap';
 function ItemPatient({patients}) {
     return (
         <div className="patient_list_container">
-            {console.log(patients.length)}
             {patients && patients.map((item, index) => {
                     return (
                         <div className='item_patient' key={index}>
@@ -14,6 +13,9 @@ function ItemPatient({patients}) {
                             </div>
                             <div className='address'>
                                 {item.resource.extension[3].valueString}
+                            </div>
+                            <div className='createdAt'>
+                                {item.resource.extension[5] ? item.resource.extension[5].valueString : <></>}
                             </div>
                             <Button variant="outline-success">View</Button>
                         </div>

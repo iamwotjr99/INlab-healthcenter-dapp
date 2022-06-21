@@ -4,8 +4,8 @@ import HospitalSetting from "./HospitalSetting";
 function HospitalRight({state}) {
     return (
         <div className="content">
-            {state == 1 ? <HospitalSendPHR /> :
-             state == 2 ? <HospitalSetting /> :
+            {state === 1 ? <HospitalSendPHR /> :
+             state === 2 ? <HospitalSetting /> :
              <HospitalPatients />}
         </div>
     )

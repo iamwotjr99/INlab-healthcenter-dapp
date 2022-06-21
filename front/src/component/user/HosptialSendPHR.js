@@ -24,6 +24,7 @@ function HospitalSendPHR() {
         symptom: "",
         comment: "",
         doctorName: "",
+        createdAt: ""
     });
 
     const sendPHR = async () => {
@@ -108,6 +109,10 @@ function HospitalSendPHR() {
                {
                    "url": "age",
                    "valueString": formData.age
+               },
+               {
+                   "url": "createdAt",
+                   "valueString": formData.createdAt
                }
            ],
            "generalPractitioner": {
@@ -142,11 +147,17 @@ function HospitalSendPHR() {
     }
 
     const changeHandler = (e) => {
+        const date = new Date().toLocaleString();
         setFormData({
             ...formData,
+            createdAt: date,
             [e.target.name]: e.target.value,
         })
         console.log(formData);
+    }
+
+    const onClickSendHandler = () => {
+        sendPHR();
     }
 
     return (
@@ -259,7 +270,7 @@ function HospitalSendPHR() {
                             <Form.Control type="text" placeholder="Enter doctor name" name="doctorName" value={formData.doctorName}
                             onChange={changeHandler}/>
                         </Form.Group>
-                        <Button className="btn_phr_send" variant="success" onClick={sendPHR}>Send</Button>
+                        <Button className="btn_phr_send" variant="success" onClick={onClickSendHandler}>Send</Button>
                     </div>
                 </div>
             </Form>

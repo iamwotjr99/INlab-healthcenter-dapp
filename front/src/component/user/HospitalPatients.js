@@ -11,12 +11,10 @@ function HospitalPatients() {
         let temp = [];
         await axios.get(`${BASE_URL}/Patient?organization=INLab`).then((res) => {
             for(const item of res.data.entry) {
-                if(item.resource.meta.tag == undefined) {
-                    console.log(item);
+                if(item.resource.meta.tag === undefined) {
                     temp.push(item);
                 } 
             }
-            console.log("temp:", temp);
             setPatientsList(temp);
         });
     }

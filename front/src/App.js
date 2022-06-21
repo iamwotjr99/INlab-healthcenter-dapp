@@ -22,7 +22,7 @@ function App() {
         <Route path="/patientsignup" element={<PatientSignUp />} />
         <Route path="/posttest" element={<FHIRTest />} />
         <Route path="/user" element={<User />} />
-        <Route path='/hospital' element={<Hospital />} />
+        <Route path="/hospital/:hospitalId" element={<Hospital />} />
       </Routes>
     </div>
     </BrowserRouter>

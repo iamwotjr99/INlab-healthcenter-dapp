@@ -6,8 +6,6 @@ function SideMenu({setState}) {
     ]
 
     const onClickBtn = (event, key) => {
-        console.log(event);
-        console.log(key);
         setState(key);
     }
 
@@ -18,7 +16,7 @@ function SideMenu({setState}) {
                     {menu.map((item, index) => {
                         return (
                             <li key={index} onClick={e => onClickBtn(e, index)}>
-                                <a href="#">
+                                <a href="#!">
                                     <i className={item.icon} ></i>
                                     <span className='nav-text'>
                                         {item.name}
