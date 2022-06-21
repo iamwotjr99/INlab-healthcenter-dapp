@@ -19,7 +19,7 @@ function User() {
         })
     }
     const onClickBtn = () => {
-        if(user.email === "HospitalA") {
+        if(user.email !== undefined) {
             navigate(`/hospital/${user.email}`, {id: user.email});
         }
     }
