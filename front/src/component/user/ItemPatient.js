@@ -1,26 +1,25 @@
-import { Button } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import ItemPatientLeft from './ItemPatientLeft';
+import ItemPatientRight from './ItemPatientRight';
 function ItemPatient({patients}) {
+    const [leftItem, setLeftItem] = useState([]);
+    const [rightItem, setRightItem] = useState([]);
+
+    useEffect(() => {
+            let leftTemp = [];
+            let rightTemp = [];
+            patients.map((item, index) => {
+                // (index%2 === 0 ? setLeftItem([...leftItem, item]) : setRightItem([...rightItem, item]));
+                if(index % 2 === 0) {
+                    leftItem.push(item);
+                } else {
+                    rightItem.push(item);
+                }
+            })
+    }, [])
     return (
         <div className="patient_list_container">
-            {patients && patients.map((item, index) => {
-                    return (
-                        <div className='item_patient' key={index}>
-                            <div className='name'>
-                                PID: {item.resource.id}
-                            </div>
-                            <div className='doctor'>
-                                {item.resource.extension[2].valueString}
-                            </div>
-                            <div className='address'>
-                                {item.resource.extension[3].valueString}
-                            </div>
-                            <div className='createdAt'>
-                                {item.resource.extension[5] ? item.resource.extension[5].valueString : <></>}
-                            </div>
-                            <Button variant="outline-success">View</Button>
-                        </div>
-                    )
-                })}
+            {console.log(leftItem, rightItem)}
         </div>
     )
 }
