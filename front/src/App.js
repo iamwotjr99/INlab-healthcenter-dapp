@@ -9,6 +9,7 @@ import PatientSignUp from './component/patient/PatientSignUp';
 import FHIRTest from './component/FHIRTest';
 import User from './component/user/User';
 import Hospital from './component/user/Hospital';
+import Doctor from './component/user/Doctor';
 function App() {
 
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/patientsignup" element={<PatientSignUp />} />
         <Route path="/posttest" element={<FHIRTest />} />
         <Route path="/user" element={<User />} />
-        <Route path="/hospital/:hospitalId" element={<Hospital />} />
+        <Route path="/hospital/:id" element={<Hospital />} />
+        <Route path="/doctor/:id" element={<Doctor />} />
       </Routes>
     </div>
     </BrowserRouter>

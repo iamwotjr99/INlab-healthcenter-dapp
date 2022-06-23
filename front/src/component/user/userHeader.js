@@ -2,7 +2,7 @@ import { Nav, Container, Navbar, Dropdown } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 function UserHeader( ) {
-    const {hospitalId} = useParams();
+    const {id} = useParams();
     return (
         <div className='user_header'>
                 <Navbar variant="light">
@@ -13,8 +13,8 @@ function UserHeader( ) {
                     </Container>
                     <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic" className='drop_btn'>
-                            {console.log(hospitalId)}
-                            {hospitalId ? hospitalId : "Sign up"}
+                            {console.log(id)}
+                            {id ? id : "Sign up"}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>

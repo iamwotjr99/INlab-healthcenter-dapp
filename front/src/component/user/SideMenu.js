@@ -1,10 +1,28 @@
-function SideMenu({setState}) {
-    const menu = [
-        {icon: "fa fa-soild fa-hospital-user", name: "Patients"},
-        {icon: "fa fa-solid fa-file-import", name: "Send PHR"},
-        {icon: "fa fa-solid fa-gear", name: "Setting"}
-    ]
+function SideMenu({setState, CODE}) {
+    let menu = [];
+    if(CODE === 1) {
+        menu = [
+            {icon: "fa fa-solid fa-info", name: "My Info"},
+            {icon: "fa fa-solid fa-reply", name: "Request PHR"},
+            {icon: "fa fa-solid fa-users-between-lines", name: "Patient List"}
+        ]
+    } else {
+        menu = [
+            {icon: "fa fa-soild fa-hospital-user", name: "Patients"},
+            {icon: "fa fa-solid fa-file-import", name: "Send PHR"},
+            {icon: "fa fa-solid fa-gear", name: "Setting"},
+        ]
+    }
+    // const menu = [
+    //     {icon: "fa fa-soild fa-hospital-user", name: "Patients"},
+    //     {icon: "fa fa-solid fa-file-import", name: "Send PHR"},
+    //     {icon: "fa fa-solid fa-gear", name: "Setting"},
+    //     {icon: "fa fa-solid fa-info", name: "My Info"},
+    //     {icon: "fa fa-solid fa-reply", name: "Request PHR"},
+    //     {icon: "fa fa-solid fa-rectangle-history", name: "Patient List"}
+    // ]
 
+    
     const onClickBtn = (event, key) => {
         setState(key);
     }

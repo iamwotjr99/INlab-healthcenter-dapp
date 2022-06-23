@@ -22,6 +22,9 @@ function User() {
         if(user.email !== undefined) {
             navigate(`/hospital/${user.email}`, {id: user.email});
         }
+        if(user.email === "James") {
+            navigate(`/doctor/${user.email}`, {id: user.email})
+        }
     }
     return (
         <div className='user'>

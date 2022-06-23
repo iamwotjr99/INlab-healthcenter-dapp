@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import ItemPatient from './ItemPatient';
 function HospitalPatients() {
-    const {hospitalId} = useParams();
+    const {id} = useParams();
     const BASE_URL = "http://203.247.240.226:8080/fhir"
 
     const [patientList, setPatientsList] = useState([]);
@@ -12,7 +12,7 @@ function HospitalPatients() {
 
     async function getPatients() {
         let temp = [];
-        await axios.get(`${BASE_URL}/Patient?organization=${hospitalId}`).then((res) => {
+        await axios.get(`${BASE_URL}/Patient?organization=${id}`).then((res) => {
             for(const item of res.data.entry) {
                 if(item.resource.meta.tag === undefined) {
                     temp.push(item);
@@ -23,7 +23,7 @@ function HospitalPatients() {
     }
 
     async function getHospital() {
-        await axios.get(`${BASE_URL}/Organization/${hospitalId}`).then((res) => {
+        await axios.get(`${BASE_URL}/Organization/${id}`).then((res) => {
             setHospital(res.data);
         })
     }
