@@ -1,6 +1,6 @@
 function DoctorInfo() {
     return (
-        <div className="doctor_info">Info</div>
+        <div className="doctor_tx">Transaction</div>
     )
 }
 
