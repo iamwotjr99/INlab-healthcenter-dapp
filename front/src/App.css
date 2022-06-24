@@ -447,23 +447,60 @@ nav ul,nav li {
   ;
 }
 
-.patient_list_container > .item_patient {
+.patient_list_left {
+  width: 50%;
+}
+
+.patient_list_container > .patient_list_left > .item_patient_left {
   margin: 2% 2% 2% 2%;
   background-color: white;
   border-radius: 10px;
-  padding: 1.5% 1.5% 1.5% 1.5%;
+  padding: 2.5% 2.5% 2.5% 2.5%;
 }
 
-.patient_list_container > .item_patient > .name {
+.patient_list_right {
+  width: 50%;
+}
+
+.patient_list_container > .patient_list_right > .item_patient_right {
+  margin: 2% 2% 2% 2%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2.5% 2.5% 2.5% 2.5%;
+}
+
+.item_patient_left > .name {
   font-size: 1.3rem;
-}
-
-.patient_list_container > .item_patient > .address {
   margin-bottom: 1%;
 }
 
-.patient_list_container > .item_patient > .createdAt {
+.item_patient_left > .doctor {
+  margin-bottom: 0.5%;
+}
+
+.item_patient_left > .address {
+  margin-bottom: 0.5%;
+}
+
+.item_patient_left > .createdAt {
+  margin-bottom: 0.5%;
+}
+
+.item_patient_right > .name {
+  font-size: 1.3rem;
   margin-bottom: 1%;
+}
+
+.item_patient_right > .doctor {
+  margin-bottom: 0.5%;
+}
+
+.item_patient_right > .address {
+  margin-bottom: 0.5%;
+}
+
+.item_patient_right > .createdAt {
+  margin-bottom: 0.5%;
 }
 
 /* Hospital PHR */

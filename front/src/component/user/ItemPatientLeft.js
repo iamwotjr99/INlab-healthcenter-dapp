@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 function ItemPatientLeft({ item, index }) {
     return (
         <div className='item_patient_left' key={index}>
+            {console.log("itemPatientLeft: ", item)}
             <div className='name'>
                  PID: {item.resource.id}
              </div>
