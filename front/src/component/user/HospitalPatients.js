@@ -13,6 +13,7 @@ function HospitalPatients() {
     async function getPatients() {
         let temp = [];
         await axios.get(`${BASE_URL}/Patient?organization=${id}`).then((res) => {
+            console.log("hospitalPatient: ", res.data.entry);
             for(const item of res.data.entry) {
                 if(item.resource.meta.tag === undefined) {
                     temp.push(item);

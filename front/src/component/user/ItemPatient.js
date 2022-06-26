@@ -10,14 +10,16 @@ function ItemPatient({patients}) {
             let leftTemp = [];
             let rightTemp = [];
             console.log("in map: ", patients);
-            patients.map((item, index) => {
-                // (index%2 === 0 ? setLeftItem([...leftItem, item]) : setRightItem([...rightItem, item]));
-                if(index % 2 === 0) {
-                    leftTemp.push(item);
-                } else {
-                    rightTemp.push(item);
-                }
-            })
+            if(patients !== undefined) {
+                patients.map((item, index) => {
+                    // (index%2 === 0 ? setLeftItem([...leftItem, item]) : setRightItem([...rightItem, item]));
+                    if(index % 2 === 0) {
+                        leftTemp.push(item);
+                    } else {
+                        rightTemp.push(item);
+                    }
+                })
+            }
             setLeftItem(leftTemp);
             setRightItem(rightTemp);
     }, [patients])
