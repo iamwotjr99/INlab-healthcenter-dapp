@@ -27,6 +27,48 @@ function HospitalSendPHR() {
         createdAt: ""
     });
 
+    const postCondition = async () => {
+        await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
+            "resourceType": "Condition",
+            "id": formData.pid,
+            "clinicalStatus": {
+                "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                    "code": "active"
+                }
+             ]
+            },
+            "verificationStatus": {
+                "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                    "code": "confirmed"
+                }
+             ]
+            },
+            "category": [
+                {
+                "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                        "code": "encounter-diagnosis",
+                        "display": "Encounter Diagnosis"
+                    }
+                 ]
+                }
+            ],
+            "code": {
+                "text": formData.symptom
+            },
+            "subject": {
+                "reference": `Patient/${formData.pid}`
+            },
+            "onsetDateTime": formData.createdAt
+
+        })
+    }
+
     const sendPHR = async () => {
         axios.put(`${BASE_URL}/Patient/${formData.pid}`, {
            "resourceType": "Patient",
@@ -123,8 +165,10 @@ function HospitalSendPHR() {
            }
         }).then((res) => {
            console.log("from server: ", res);
+           postCondition();
        })
     }
+
 
     const telChangeHandler = (e) => {
         setFormData({
