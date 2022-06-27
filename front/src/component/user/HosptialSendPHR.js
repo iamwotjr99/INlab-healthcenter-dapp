@@ -1,8 +1,10 @@
 import { Form, Button } from "react-bootstrap";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import crypto from 'crypto-js';
 function HospitalSendPHR() {
     const BASE_URL = "http://203.247.240.226:8080/fhir"
+    const BLOCK_CHAIN_URL = "http://203.247.240.226:22650/api"
     const [formData, setFormData] = useState({
         pid: "",
         assigner: "",
@@ -167,6 +169,25 @@ function HospitalSendPHR() {
         })
     }
 
+    const phrHash = (pid) => {
+        const PHRhash = crypto.SHA256(pid, 'INLab').toString();
+        return PHRhash
+    }
+
+    const postOnChain = async () => {
+        const PHRhash = phrHash(formData.pid);
+        await axios.post(`${BLOCK_CHAIN_URL}/create`, {
+            "EHRNumber": "EHR25",
+            "AccountID": "sisi33", 
+            "DateTime": '2022-06-27', 
+            "Organization": "INLab", 
+            "patientName": "kaungset", 
+            "Function": 'Create', 
+            "data": 'Patient EHR', 
+            "PHRHash": "1ksaSsdSAK", 
+            "checkingBalance": 10000000,
+        }).then(console.log);
+    }
 
     const telChangeHandler = (e) => {
         setFormData({
@@ -195,12 +216,12 @@ function HospitalSendPHR() {
             createdAt: date,
             [e.target.name]: e.target.value,
         })
-        console.log(formData);
     }
 
     const onClickSendHandler = async() => {
         await sendPHR();
-        await postCondition();
+        //await postCondition();
+        await postOnChain();
     }
 
     return (

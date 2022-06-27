@@ -7,14 +7,14 @@ function FHIRTest() {
     
     async function getAPI() {
         await axios.post(`${BASE_URL}/create`, {
-            "EHRNumber": "Wotjr001",
-            "patientID": 'Wotjr001',
-            "DateTime": '2022-6-21',
-            "Organization": 'Dongguk Hospital',
-            "patientName": 'Jaeseok',
-            "Function": 'Create',
-            "data": 'Patient EHR',
-            "test": "test"
+            AcountID: 'sithu27', 
+            DateTime: '2022-6-28', 
+            Organization: 'INLab', 
+            patientName: 'Sithu', 
+            Function: 'Create', 
+            data: 'Patient EHR', 
+            PHRhash: 'rQZRVpG4phj1aSuke5yDtzV3Q0z2FnDseAPjRDrQLRHoLd6Xt1Vgqzu7s', 
+            checkingBalance: 10000000,
         }).then(console.log)
     }
     return (
