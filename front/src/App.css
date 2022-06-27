@@ -603,3 +603,30 @@ nav ul,nav li {
   width: 100%;
   overflow: auto;
 }
+
+/* Doctor Request */
+.doctor_reqeust {
+  display: flex;
+
+}
+
+.doctor_reqeust > .request_container {
+  width: 50%;
+  margin-top: 30%;
+  padding: 2% 2% 2% 2%;
+  background-color: white;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+}
+
+.doctor_reqeust > .result_container {
+  width: 50%;
+  margin: 2% 2% 2% 2%;
+  padding: 2% 2% 2% 2%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+

@@ -200,9 +200,7 @@ function HospitalSendPHR() {
 
     const onClickSendHandler = async() => {
         await sendPHR();
-        await postCondition().then((res) => {
-            console.log();
-        })
+        await postCondition();
     }
 
     return (
