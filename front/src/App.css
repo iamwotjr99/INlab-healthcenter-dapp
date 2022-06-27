@@ -601,32 +601,86 @@ nav ul,nav li {
 
 .doctor_content > .right_content {
   width: 100%;
+}
+
+.doctor_content > .right_content > .content {
+  height: 100%;
   overflow: auto;
 }
+
 
 /* Doctor Request */
 .doctor_reqeust {
   display: flex;
-
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .doctor_reqeust > .request_container {
+  display: flex;
+  flex-direction: row;
   width: 50%;
-  margin-top: 30%;
-  padding: 2% 2% 2% 2%;
-  background-color: white;
+  margin-top: 2%;
   margin-left: 2%;
   margin-right: 2%;
   margin-bottom: 2%;
+}
+
+.request_container > .request_form {
+  width: 100%;
+  background-color: white;
   border-radius: 10px;
+  padding: 20% 2% 20% 2%;
 }
 
 .doctor_reqeust > .result_container {
   width: 50%;
   margin: 2% 2% 2% 2%;
-  padding: 2% 2% 2% 2%;
-  background-color: white;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
 }
 
+.result_container > .item_result {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 1%;
+  margin-top: 2%;
+  padding: 2% 2% 2% 2%;
+  text-align: left;
+}
+
+.item_result > .pid {
+  font-size: 1.3rem;
+  margin-bottom: 1%;
+}
+
+.item_result > .symptom {
+  margin-bottom: 0.5%;
+}
+
+.item_result > .doctor {
+  margin-bottom: 0.5%;
+}
+
+.item_result > .assigner {
+  margin-bottom: 0.5%;
+}
+
+.item_result > .createdAt {
+  margin-bottom: 0.5%;
+}
+
+.result_container > .item_result > .colum_2_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.item_result > .colum_2_item > .btn_request {
+  margin-left: auto;
+}
 

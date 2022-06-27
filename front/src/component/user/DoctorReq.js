@@ -1,6 +1,8 @@
 import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
+
+import ItemResult from './ItemResult';
 function DoctorReq() {
     const BASE_URL = "http://203.247.240.226:8080/fhir"
     const [request, setRequest] = useState({
@@ -14,6 +16,7 @@ function DoctorReq() {
             for(const item of res.data.entry) {
                 temp.push(item);
             }
+            console.log(temp);
         })
         setResultList(temp);
     }
@@ -34,7 +37,7 @@ function DoctorReq() {
                 <div className='request_form'>
                     <Form>
                         <Form.Group className="mb-3" controlId="req">
-                            <Form.Label>Request Data</Form.Label>
+                            <Form.Label><h4>Request EHR</h4></Form.Label>
                             <Form.Control type="text" placeholder="Search data" name="req" value={request.req}
                                 onChange={changeHandler}/>
                         </Form.Group>
@@ -44,8 +47,8 @@ function DoctorReq() {
             </div>
 
             <div className="result_container">
-                {resultList && resultList.map((item) => {
-                    return item.resource.id;
+                {resultList && resultList.map((item, index) => {
+                    return <ItemResult item={item} key={index} />
                 })}
             </div>
         </div>

@@ -125,48 +125,68 @@ function HospitalSendPHR() {
            }
         }).then((res) => {
            console.log("from server: ", res);
+           postCondition(res);
        })
     }
 
-    const postCondition = async () => {
-        await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
-            "resourceType": "Condition",
-            "id": formData.pid,
-            "clinicalStatus": {
-                "coding": [
-                {
-                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                    "code": "active"
-                }
-             ]
-            },
-            "verificationStatus": {
-                "coding": [
-                {
-                    "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
-                    "code": "confirmed"
-                }
-             ]
-            },
-            "category": [
-                {
-                "coding": [
+    const postCondition = async (prevResult) => {
+        if(prevResult !== undefined) {
+            await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
+                "resourceType": "Condition",
+                "id": formData.pid,
+                "extension": [
                     {
-                        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
-                        "code": "encounter-diagnosis",
-                        "display": "Encounter Diagnosis"
+                        "url": "doctor",
+                        "valueString": formData.doctorName
+                    },
+                    {
+                        "url": "assigner",
+                        "valueString": formData.assigner
+                    },
+                    {
+                        "url": "createdAt",
+                        "valueString": formData.createdAt
+                    }
+                ],
+                "clinicalStatus": {
+                    "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                        "code": "active"
                     }
                  ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                        "code": "confirmed"
+                    }
+                 ]
+                },
+                "category": [
+                    {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                            "code": "encounter-diagnosis",
+                            "display": "Encounter Diagnosis"
+                        }
+                     ]
+                    }
+                ],
+                "code": {
+                    "text": formData.symptom
+                },
+                "subject": {
+                    "reference": `Patient/${formData.pid}`
                 }
-            ],
-            "code": {
-                "text": formData.symptom
-            },
-            "subject": {
-                "reference": `Patient/${formData.pid}`
-            }
-
-        })
+    
+            }).then((res) => {
+                console.log(res);
+            })
+        }
+        
     }
 
     const phrHash = (pid) => {
@@ -177,14 +197,14 @@ function HospitalSendPHR() {
     const postOnChain = async () => {
         const PHRhash = phrHash(formData.pid);
         await axios.post(`${BLOCK_CHAIN_URL}/create`, {
-            "EHRNumber": "EHR25",
-            "AccountID": "sisi33", 
-            "DateTime": '2022-06-27', 
-            "Organization": "INLab", 
-            "patientName": "kaungset", 
+            "EHRNumber": formData.pid,
+            "AccountID": formData.pid, 
+            "DateTime": formData.createdAt, 
+            "Organization": formData.assigner, 
+            "patientName": formData.name, 
             "Function": 'Create', 
             "data": 'Patient EHR', 
-            "PHRHash": "1ksaSsdSAK", 
+            "PHRHash": PHRhash, 
             "checkingBalance": 10000000,
         }).then(console.log);
     }
@@ -220,7 +240,7 @@ function HospitalSendPHR() {
 
     const onClickSendHandler = async() => {
         await sendPHR();
-        //await postCondition();
+        // await postCondition();
         await postOnChain();
     }
 
@@ -231,14 +251,14 @@ function HospitalSendPHR() {
                     <div className="phr_top_left">
                         <div className="col_1">
                             <Form.Group className="mb-3" controlId="pid">
-                                <Form.Label>PID</Form.Label>
+                                <Form.Label>*PID</Form.Label>
                                 <Form.Control type="text" placeholder="Enter PID" name="pid" value={formData.pid}
                                 onChange={changeHandler}/>
                             </Form.Group>
                         </div>
                         <div className="col_2">
                             <Form.Group className="mb-3" controlId="name">
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label>*Name</Form.Label>
                                 <Form.Control type="text" placeholder="Enter name" name="name" value={formData.name}
                                 onChange={changeHandler}/>
                             </Form.Group>
@@ -325,7 +345,7 @@ function HospitalSendPHR() {
                     </div>
                     <div className="col_3">
                         <Form.Group className="mb-3" controlId="assginer">
-                            <Form.Label>Assigner</Form.Label>
+                            <Form.Label>*Assigner</Form.Label>
                             <Form.Control type="text" placeholder="Enter assigner" name="assigner" value={formData.assigner}
                             onChange={changeHandler}/>
                          </Form.Group>
