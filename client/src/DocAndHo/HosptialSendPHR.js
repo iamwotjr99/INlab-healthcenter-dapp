@@ -1,7 +1,10 @@
-import { Form, Button } from "react-bootstrap";
-import { useState } from 'react';
+import { Form } from "react-bootstrap";
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import crypto from 'crypto-js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function HospitalSendPHR() {
     const BASE_URL = "http://203.247.240.226:8080/fhir"
     const BLOCK_CHAIN_URL = "http://203.247.240.226:22650/api"
@@ -28,6 +31,8 @@ function HospitalSendPHR() {
         doctorName: "",
         createdAt: ""
     });
+
+    const toastId = useRef();
 
     const sendPHR = async () => {
         axios.put(`${BASE_URL}/Patient/${formData.pid}`, {
@@ -134,6 +139,20 @@ function HospitalSendPHR() {
             await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
                 "resourceType": "Condition",
                 "id": formData.pid,
+                "extension": [
+                    {
+                        "url": "doctor",
+                        "valueString": formData.doctorName
+                    },
+                    {
+                        "url": "assigner",
+                        "valueString": formData.assigner
+                    },
+                    {
+                        "url": "createdAt",
+                        "valueString": formData.createdAt
+                    }
+                ],
                 "clinicalStatus": {
                     "coding": [
                     {
@@ -168,6 +187,8 @@ function HospitalSendPHR() {
                     "reference": `Patient/${formData.pid}`
                 }
     
+            }).then((res) => {
+                console.log(res);
             })
         }
     }
@@ -224,13 +245,44 @@ function HospitalSendPHR() {
         // console.log(formData);
     }
 
+    const resetForm = () => {
+        setFormData({
+            pid: "",
+            assigner: "",
+            name: "",
+            age: 0,
+            telecome: {
+                myPhone: "",
+            },
+            gender: "",
+            birthdate: "",
+            address: "",
+            contact: {
+                name: "",
+                phone: "",
+                relationship: "",
+                address: "",
+                gender: "",
+            },
+            symptom: "",
+            comment: "",
+            doctorName: "",
+            createdAt: ""
+        })
+    }
+
     const onClickSendHandler = async() => {
-        await sendPHR();
-        await postOnChain();
+        toastId.current = toast("Wait.. Sending PHR", {autoClose: false});
+        await sendPHR()
+        await postOnChain().then(() => {
+            toast.update(toastId.current, { render: 'Sending success', type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 5000});
+            resetForm();
+        })
     }
 
     return (
         <div className="hospital_send_phr">
+            <ToastContainer />
             <Form>
                 <div className="phr_top">
                     <div className="phr_top_left">
