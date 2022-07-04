@@ -1,8 +1,10 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from 'react';
 import axios from 'axios';
+import crypto from 'crypto-js';
 function HospitalSendPHR() {
     const BASE_URL = "http://203.247.240.226:8080/fhir"
+    const BLOCK_CHAIN_URL = "http://203.247.240.226:22650/api"
     const [formData, setFormData] = useState({
         pid: "",
         assigner: "",
@@ -123,49 +125,73 @@ function HospitalSendPHR() {
            }
         }).then((res) => {
            console.log("from server: ", res);
+           postCondition(res);
        })
     }
 
-    const postCondition = async () => {
-        await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
-            "resourceType": "Condition",
-            "id": formData.pid,
-            "clinicalStatus": {
-                "coding": [
-                {
-                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                    "code": "active"
-                }
-             ]
-            },
-            "verificationStatus": {
-                "coding": [
-                {
-                    "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
-                    "code": "confirmed"
-                }
-             ]
-            },
-            "category": [
-                {
-                "coding": [
+    const postCondition = async (prevResult) => {
+        if(prevResult !== undefined) {
+            await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
+                "resourceType": "Condition",
+                "id": formData.pid,
+                "clinicalStatus": {
+                    "coding": [
                     {
-                        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
-                        "code": "encounter-diagnosis",
-                        "display": "Encounter Diagnosis"
+                        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                        "code": "active"
                     }
                  ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                        "code": "confirmed"
+                    }
+                 ]
+                },
+                "category": [
+                    {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                            "code": "encounter-diagnosis",
+                            "display": "Encounter Diagnosis"
+                        }
+                     ]
+                    }
+                ],
+                "code": {
+                    "text": formData.symptom
+                },
+                "subject": {
+                    "reference": `Patient/${formData.pid}`
                 }
-            ],
-            "code": {
-                "text": formData.symptom
-            },
-            "subject": {
-                "reference": `Patient/${formData.pid}`
-            }
-
-        })
+    
+            })
+        }
     }
+
+    const phrHash = (pid) => {
+        const PHRhash = crypto.SHA256(pid, 'INLab').toString();
+        return PHRhash
+    }
+
+    const postOnChain = async () => {
+        const PHRhash = phrHash(formData.pid);
+        await axios.post(`${BLOCK_CHAIN_URL}/create`, {
+            "EHRNumber": formData.pid,
+            "AccountID": formData.pid, 
+            "DateTime": formData.createdAt, 
+            "Organization": formData.assigner, 
+            "patientName": formData.name, 
+            "Function": 'Create', 
+            "data": 'Patient EHR', 
+            "PHRHash": PHRhash, 
+            "checkingBalance": 10000000,
+        }).then(console.log);
+    }
+
 
 
     const telChangeHandler = (e) => {
@@ -195,14 +221,12 @@ function HospitalSendPHR() {
             createdAt: date,
             [e.target.name]: e.target.value,
         })
-        console.log(formData);
+        // console.log(formData);
     }
 
     const onClickSendHandler = async() => {
         await sendPHR();
-        await postCondition().then((res) => {
-            console.log();
-        })
+        await postOnChain();
     }
 
     return (
