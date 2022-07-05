@@ -7,6 +7,7 @@ import UserModal from './UserModal';
 import { Nav, Container, Navbar, Dropdown } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
+import DoctorNotification from '../DocAndHo/DoctorNotification';
 
 import '../css/HeaderModal.css';
 
@@ -19,6 +20,7 @@ function Header() {
 
   const openNotificationModal = () => {
     setNotificationModalOpen(true);
+    console.log("open opne");
   };
   const closeNotificationModal = () => {
     setNotificationModalOpen(false);
@@ -34,7 +36,8 @@ function Header() {
   return (
     <>
     <UserModal open={UsermodalOpen} close={closeUserModal} header="Modal heading"></UserModal>
-    <NotificationModal open={NotificationmodalOpen} close={closeNotificationModal} header="Modal heading"></NotificationModal>
+    {id == "jhikyuinn" ? <NotificationModal open={NotificationmodalOpen} close={closeNotificationModal} header="Modal heading"></NotificationModal> : <></>}
+    {id == "James" ? <DoctorNotification open={NotificationmodalOpen} close={closeNotificationModal} header="Modal heading" /> : <></>}
     
     <nav style={{backgroundColor:"rgb(134, 193, 217)"}} className="navbar">
          <div className="navbar-header">

@@ -8,6 +8,8 @@ import Hospital from './DocAndHo/Hospital';
 import Doctor from './DocAndHo/Doctor';
 import InformationExchange from './components/InformationExchange';
 
+import Payment from './DocAndHo/Payment';
+
 import './App.css';
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
                 <Route path="/information" exact element={<InformationExchange/>} />
                 <Route path="/hospital/:id" element={<Hospital />} />
                 <Route path="/doctor/:id" element={<Doctor />} />
+                <Route path='/test' element={<Payment />} />
               </Routes>
               </Router>
             </div>

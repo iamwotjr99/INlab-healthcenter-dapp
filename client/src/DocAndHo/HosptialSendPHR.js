@@ -200,6 +200,7 @@ function HospitalSendPHR() {
 
     const postOnChain = async () => {
         const PHRhash = phrHash(formData.pid);
+        console.log(formData, PHRhash);
         await axios.post(`${BLOCK_CHAIN_URL}/create`, {
             "EHRNumber": formData.pid,
             "AccountID": formData.pid, 
@@ -210,6 +211,7 @@ function HospitalSendPHR() {
             "data": 'Patient EHR', 
             "PHRHash": PHRhash, 
             "checkingBalance": 10000000,
+            "phonenumber" : formData.telecome.myPhone
         }).then(console.log);
     }
 
