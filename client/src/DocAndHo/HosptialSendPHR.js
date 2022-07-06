@@ -277,7 +277,7 @@ function HospitalSendPHR() {
         toastId.current = toast("Wait.. Sending PHR", {autoClose: false});
         await sendPHR()
         await postOnChain().then(() => {
-            toast.update(toastId.current, { render: 'Sending success', type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 5000});
+            toast.update(toastId.current, { render: 'Sending success', type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 3000});
             resetForm();
         })
     }
