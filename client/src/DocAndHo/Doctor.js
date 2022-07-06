@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import KyuHeader from '../Patient/Header';
 import SideMenu from './SideMenu';
 import DoctorRight from './DoctorRight';
+import "../css/PatientRecord.css";
 function Doctor() {
     const location = useLocation();
     const [state, setState] = useState();
