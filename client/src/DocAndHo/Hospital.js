@@ -1,5 +1,5 @@
 import SideMenu from './SideMenu';
-import KyuHeader from '../components/Header';
+import KyuHeader from '../Patient/Header';
 import HospitalRight from './HospitalRight';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';

@@ -16,6 +16,7 @@ body{
   font-family: 'gotham', sans-serif;
 }
 
+
 #home {
   background-image: url('assets/home.jpeg');
   background-position:right 7vh;
@@ -47,7 +48,6 @@ nav {
   padding-left: 1em;
   font-weight: 100;
 }
-
 .navbar-brand:hover {
   text-decoration-line: none;
   color:rgb(80, 118, 133);

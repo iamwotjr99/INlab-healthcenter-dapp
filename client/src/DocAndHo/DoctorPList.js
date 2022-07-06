@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Search from "../components/Search"
+import Search from "../Patient/Search"
 
 import ItemPatient from './ItemPatient';
 import "../css/PatientRecord.css";

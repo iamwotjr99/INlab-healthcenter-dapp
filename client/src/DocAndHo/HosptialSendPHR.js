@@ -1,7 +1,8 @@
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useState, useRef } from 'react';
 import axios from 'axios';
 import crypto from 'crypto-js';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,8 +33,7 @@ function HospitalSendPHR() {
         createdAt: ""
     });
 
-    const toastId = useRef();
-
+    const toastId  = useRef();
     const sendPHR = async () => {
         axios.put(`${BASE_URL}/Patient/${formData.pid}`, {
            "resourceType": "Patient",
@@ -134,63 +134,123 @@ function HospitalSendPHR() {
        })
     }
 
+
     const postCondition = async (prevResult) => {
+
         if(prevResult !== undefined) {
+
             await axios.put(`${BASE_URL}/Condition/${formData.pid}`, {
+
                 "resourceType": "Condition",
+
                 "id": formData.pid,
+
                 "extension": [
+
                     {
+
                         "url": "doctor",
+
                         "valueString": formData.doctorName
+
                     },
+
                     {
+
                         "url": "assigner",
+
                         "valueString": formData.assigner
+
                     },
+
                     {
+
                         "url": "createdAt",
+
                         "valueString": formData.createdAt
+
                     }
+
                 ],
+
                 "clinicalStatus": {
+
                     "coding": [
+
                     {
+
                         "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+
                         "code": "active"
+
                     }
+
                  ]
+
                 },
+
                 "verificationStatus": {
+
                     "coding": [
+
                     {
+
                         "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+
                         "code": "confirmed"
+
                     }
+
                  ]
+
                 },
+
                 "category": [
+
                     {
+
                     "coding": [
+
                         {
+
                             "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+
                             "code": "encounter-diagnosis",
+
                             "display": "Encounter Diagnosis"
+
                         }
+
                      ]
+
                     }
+
                 ],
+
                 "code": {
+
                     "text": formData.symptom
+
                 },
+
                 "subject": {
+
                     "reference": `Patient/${formData.pid}`
+
                 }
+
     
+
             }).then((res) => {
+
                 console.log(res);
+
             })
+
         }
+
+        
+
     }
 
     const phrHash = (pid) => {
@@ -200,22 +260,21 @@ function HospitalSendPHR() {
 
     const postOnChain = async () => {
         const PHRhash = phrHash(formData.pid);
-        console.log(formData, PHRhash);
+        console.log(formData);
         await axios.post(`${BLOCK_CHAIN_URL}/create`, {
-            "EHRNumber": formData.pid,
-            "AccountID": formData.pid, 
-            "DateTime": formData.createdAt, 
-            "Organization": formData.assigner, 
-            "patientName": formData.name, 
-            "Function": 'Create', 
-            "data": 'Patient EHR', 
-            "PHRHash": PHRhash, 
-            "checkingBalance": 10000000,
-            "phonenumber" : formData.telecome.myPhone
+                "EHRNumber" : formData.pid,
+                "AccountID": formData.pid,
+                "DateTime": formData.createdAt,
+                "Organization": formData.assigner,
+                "patientName": formData.name,
+                "Function": "Create",
+                "data": "Patient EHR",
+                "PHRHash": PHRhash,
+                "checkingBalance":10000000,
+                "phonenumber" : formData.telecome.myPhone
+     
         }).then(console.log);
     }
-
-
 
     const telChangeHandler = (e) => {
         setFormData({
@@ -244,7 +303,7 @@ function HospitalSendPHR() {
             createdAt: date,
             [e.target.name]: e.target.value,
         })
-        // console.log(formData);
+        console.log(formData);
     }
 
     const resetForm = () => {
@@ -277,9 +336,10 @@ function HospitalSendPHR() {
         toastId.current = toast("Wait.. Sending PHR", {autoClose: false});
         await sendPHR()
         await postOnChain().then(() => {
-            toast.update(toastId.current, { render: 'Sending success', type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 3000});
+            toast.update(toastId.current, { render: 'Sending success', type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 5000});
             resetForm();
         })
+
     }
 
     return (
@@ -313,7 +373,7 @@ function HospitalSendPHR() {
                                     <option>male</option>
                                     <option>female</option>
                                 </Form.Select>
-                            </Form.Group>           
+                            </Form.Group>          
                         </div>
                         <div className="col_3">
                             <Form.Group className="mb-3" controlId="phone">
@@ -334,7 +394,7 @@ function HospitalSendPHR() {
                         <div className="col_1">
                             <Form.Group className="mb-3" controlId="relationship">
                                 <Form.Label>Relationship</Form.Label>
-                                <Form.Control type="text" placeholder="Relationship with patient" 
+                                <Form.Control type="text" placeholder="Relationship with patient"
                                 name="relationship" value={formData.contact.relationship}
                                 onChange={conChangeHandler}/>
                             </Form.Group>
@@ -351,7 +411,7 @@ function HospitalSendPHR() {
                                     <option>male</option>
                                     <option>female</option>
                                 </Form.Select>
-                            </Form.Group> 
+                            </Form.Group>
                         </div>
                         <div className="col_3">
                             <Form.Group className="mb-3" controlId="contact_phone">
@@ -393,7 +453,7 @@ function HospitalSendPHR() {
                             <Form.Control type="text" placeholder="Enter doctor name" name="doctorName" value={formData.doctorName}
                             onChange={changeHandler}/>
                         </Form.Group>
-                        <a style={{marginLeft:"auto"}} className="my_btn" variant="success" onClick={onClickSendHandler}>Send</a>
+                        <Button className="btn_phr_send" variant="success" onClick={onClickSendHandler}>Send</Button>
                     </div>
                 </div>
             </Form>

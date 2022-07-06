@@ -15,9 +15,9 @@ vertical-align: middle;
 font-size:1.38rem;
 }
 
-
 .main-menu:hover,nav.main-menu.expanded {
 width: 14rem;
+height: 95vh;
 overflow:visible;
 }
 
@@ -37,9 +37,6 @@ transform:translateZ(0) scale(1,1);
 z-index:1000;
 }
 
-.main-menu>ul {
-margin:7px 0;
-}
 
 .main-menu li {
 position:relative;
@@ -111,7 +108,7 @@ background-color:white;
 }
 .area {
 float: left;
-background: white;
+background: rgb(134, 193, 217);
 width: 100%;
 height: 100vh;
 }

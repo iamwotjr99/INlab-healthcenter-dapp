@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
-import KyuHeader from '../components/Header';
+import KyuHeader from '../Patient/Header';
 import SideMenu from './SideMenu';
 import DoctorRight from './DoctorRight';
 function Doctor() {

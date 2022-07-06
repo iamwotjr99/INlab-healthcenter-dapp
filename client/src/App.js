@@ -1,14 +1,13 @@
 import React, { Component} from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import Home from './components/Home';
-import Patient from "./components/Patient";
-import Recordview from "./components/Recordview";
+import Home from './Patient/Home';
+import Patient from "./Patient/Patient";
+import Recordview from "./Patient/Recordview";
 import Hospital from './DocAndHo/Hospital';
 import Doctor from './DocAndHo/Doctor';
-import InformationExchange from './components/InformationExchange';
-
-import Payment from './DocAndHo/Payment';
+import InformationExchange from './Patient/InformationExchange';
+//import ML from './MachineLearning/src/components/ML';
 
 import './App.css';
 
@@ -25,7 +24,6 @@ function App() {
                 <Route path="/information" exact element={<InformationExchange/>} />
                 <Route path="/hospital/:id" element={<Hospital />} />
                 <Route path="/doctor/:id" element={<Doctor />} />
-                <Route path='/test' element={<Payment />} />
               </Routes>
               </Router>
             </div>

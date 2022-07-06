@@ -14,7 +14,6 @@ function DoctorReq() {
     const getRequest = async () => {
         let temp = [];
         await axios.get(`${BASE_URL}/Condition?code:text=${request.req}`).then((res) => {
-            console.log(res);
             for(const item of res.data.entry) {
                 temp.push(item);
             }
@@ -57,3 +56,4 @@ function DoctorReq() {
 }
 
 export default DoctorReq;
+
