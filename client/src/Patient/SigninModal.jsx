@@ -27,6 +27,7 @@ const SignupBlock = async () => {
     "AccountID": "jhikyuinn",
     "PersonName": "jhikyuinn", 
     "CryptoBalance": 10000000,
+    "phonenumber" : "01022221111"
 }).then((res) => {
   console.log(res);
 });
@@ -39,6 +40,7 @@ const SignupHospital = async () => {
     "AccountID": "INLab",
     "PersonName": "INLab-Medical", 
     "CryptoBalance": 10000000,
+    "phonenumber" : "01022221111"
 }).then(console.log);
 }
 
@@ -48,6 +50,7 @@ const SignupDoctor = async () => {
     "AccountID": "James",
     "PersonName": "James", 
     "CryptoBalance": 10000000,
+    "phonenumber" : "01022221111"
 }).then(console.log);
 }
 
@@ -58,7 +61,7 @@ const onChangeHandler = (e) => {
     })
 }
 const onClickBtn = async() => {
-  
+
     toastId.current = toast("Wait... Trying to sign in", {autoClose: false});
 
     if(user.email ==="jhikyuinn") {
