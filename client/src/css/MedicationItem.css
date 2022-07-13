@@ -1,0 +1,12 @@
+.medi_item {
+    display: flex;
+    flex-direction: row;
+}
+
+.medi_item > .row_2 {
+    margin-right: 1%;
+}
+
+.medi_item > .row_4 {
+    margin-left: auto;
+}

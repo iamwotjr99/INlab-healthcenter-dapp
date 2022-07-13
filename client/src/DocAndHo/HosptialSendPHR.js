@@ -6,6 +6,7 @@ import crypto from 'crypto-js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import MedicationItem from "./MedicationItem";
 function HospitalSendPHR() {
     const BASE_URL = "http://203.247.240.226:8080/fhir"
     const BLOCK_CHAIN_URL = "http://203.247.240.226:22650/api"
@@ -29,9 +30,26 @@ function HospitalSendPHR() {
         },
         symptom: "",
         comment: "",
+        description: "",
         doctorName: "",
         createdAt: ""
     });
+
+    const [mediItem, setMediItem] = useState([])
+    const [mediIndex, setMediIndex] = useState(0);
+
+    const addMedication = () => {
+        mediItem.push(mediIndex);
+        setMediIndex(mediIndex + 1);
+    }
+
+    const removeMedication = (index) => {
+        if(index > -1) {
+            console.log("delete:", index);
+            mediItem.splice(index, 1);
+            setMediIndex(mediIndex - 1);
+        }
+    }
 
     const toastId  = useRef();
     const sendPHR = async () => {
@@ -70,32 +88,6 @@ function HospitalSendPHR() {
                }
            ],
            "gender": formData.gender,
-           "contact": [
-               {
-                   "relationship":[
-                       {
-                           "text":formData.contact.relationship
-                       }
-                   ],
-                   "name": {
-                       "text": formData.contact.name
-                   },
-                   "gender": formData.contact.gender,
-                   "telecom": [
-                       {
-                           "system": "phone",
-                           "value": formData.contact.phone,
-                           "use": "mobile"
-                       }
-                   ],
-                   "address": [
-                       {
-                           "use":"home",
-                           "text": formData.contact.address
-                       }
-                   ]
-               }
-           ],
            "extension" : [
                {
                    "url": "symptom",
@@ -254,7 +246,7 @@ function HospitalSendPHR() {
                         {
                             "system": "http://snomed.info/sct",
                             "code": "386661006",
-                            "display": "Fever"
+                            "display": formData.symptom
                         }
                     ]
                 },
@@ -264,7 +256,7 @@ function HospitalSendPHR() {
                             {
                                 "system": "http://snomed.info/sct",
                                 "code": "38266002",
-                                "display": "Entire body as a whole"
+                                "display": formData.comment
                             }
                         ]
                     }
@@ -345,16 +337,6 @@ function HospitalSendPHR() {
         })
     }
 
-    const conChangeHandler = (e) => {
-        setFormData({
-            ...formData,
-            contact: {
-                ...formData.contact,
-                [e.target.name]: e.target.value,
-            }
-        })
-    }
-
     const changeHandler = (e) => {
         const date = new Date().toLocaleString();
         setFormData({
@@ -377,13 +359,6 @@ function HospitalSendPHR() {
             gender: "",
             birthdate: "",
             address: "",
-            contact: {
-                name: "",
-                phone: "",
-                relationship: "",
-                address: "",
-                gender: "",
-            },
             symptom: "",
             comment: "",
             doctorName: "",
@@ -407,6 +382,7 @@ function HospitalSendPHR() {
             <Form>
                 <div className="phr_top">
                     <div className="phr_top_left">
+                        <div className="title">Patient Info</div>
                         <div className="col_1">
                             <Form.Group className="mb-3" controlId="pid">
                                 <Form.Label>PID</Form.Label>
@@ -449,7 +425,7 @@ function HospitalSendPHR() {
                             </Form.Group>
                         </div>
                     </div>
-                    <div className="phr_top_right">
+                    {/* <div className="phr_top_right">
                         <div className="col_1">
                             <Form.Group className="mb-3" controlId="relationship">
                                 <Form.Label>Relationship</Form.Label>
@@ -484,19 +460,47 @@ function HospitalSendPHR() {
                                 <Form.Control type="text" placeholder="Enter contact address" name="address" value={formData.contact.address} onChange={conChangeHandler}/>
                             </Form.Group>
                         </div>
+                    </div> */}
+                    <div className="phr_top_right">
+                        <div className="title">Condition</div>
+                        <div className="col_1">
+                            <Form.Group className="mb-3" controlId="symptom">
+                                <Form.Label>Symptom</Form.Label>
+                                <Form.Control type="text" name="symptom" value={formData.symptom} onChange={changeHandler}/>
+                            </Form.Group>
+                        </div>
+                        <div className="col_2">
+                            <Form.Group className="mb-3" controlId="description">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control as="textarea" rows={2} name="description" value={formData.description} onChange={changeHandler} />
+                            </Form.Group>
+                        </div>
+                        <div className="col_3">
+                            <div className="title_btn">
+                                <div className="title">Medication</div>
+                                <Button variant="secondary" onClick={addMedication}>+</Button>
+                            </div>
+                            
+                            {mediItem.map((item, index) => {
+                                return (
+                                    <MedicationItem index={item} key={index} remove={removeMedication} />
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
                 <div className="phr_bottom">
+                    <div className="title">Procedure</div>
                     <div className="col_1">
-                        <Form.Group className="mb-3" controlId="symptom">
-                            <Form.Label>Symptom</Form.Label>
-                            <Form.Control type="text" placeholder="Enter contact address" name="symptom" value={formData.symptom}
+                        <Form.Group className="mb-3" controlId="therapy">
+                            <Form.Label>Therapy</Form.Label>
+                            <Form.Control type="text" name="therapy" value={formData.symptom}
                             onChange={changeHandler}/>
                         </Form.Group>
                     </div>
                     <div className="col_2">
                         <Form.Group className="mb-3" controlId="comment">
-                            <Form.Label>Adding comment</Form.Label>
+                            <Form.Label>Adding comment about therapy</Form.Label>
                             <Form.Control as="textarea" rows={2} name="comment" value={formData.comment}
                             onChange={changeHandler}/>
                         </Form.Group>

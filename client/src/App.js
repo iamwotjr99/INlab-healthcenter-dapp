@@ -10,6 +10,7 @@ import InformationExchange from './Patient/InformationExchange';
 //import ML from './MachineLearning/src/components/ML';
 
 import './App.css';
+import Test from './DocAndHo/test';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/information" exact element={<InformationExchange/>} />
                 <Route path="/hospital/:id" element={<Hospital />} />
                 <Route path="/doctor/:id" element={<Doctor />} />
+                <Route path='/test' element={<Test />} />
               </Routes>
               </Router>
             </div>
