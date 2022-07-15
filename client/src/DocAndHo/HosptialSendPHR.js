@@ -35,20 +35,27 @@ function HospitalSendPHR() {
         createdAt: ""
     });
 
-    const [mediItem, setMediItem] = useState([])
-    const [mediIndex, setMediIndex] = useState(0);
+    const [mediItems, setMediItems] = useState([])
+    // const [mediIndex, setMediIndex] = useState(0);
+
+    const mediIndex = useRef(0);
 
     const addMedication = () => {
-        mediItem.push(mediIndex);
-        setMediIndex(mediIndex + 1);
+        const item = {
+            id: mediIndex.current,
+            medication: "",
+            amount: "",
+        }
+
+        setMediItems([...mediItems, item]);
+        mediIndex.current += 1;
+        console.log(mediItems);
     }
 
-    const removeMedication = (index) => {
-        if(index > -1) {
-            console.log("delete:", index);
-            mediItem.splice(index, 1);
-            setMediIndex(mediIndex - 1);
-        }
+    const removeMedication = (id) => {
+        setMediItems(mediItems.filter((item) => {
+            return (item.id !== id)
+        }))
     }
 
     const toastId  = useRef();
@@ -425,42 +432,6 @@ function HospitalSendPHR() {
                             </Form.Group>
                         </div>
                     </div>
-                    {/* <div className="phr_top_right">
-                        <div className="col_1">
-                            <Form.Group className="mb-3" controlId="relationship">
-                                <Form.Label>Relationship</Form.Label>
-                                <Form.Control type="text" placeholder="Relationship with patient"
-                                name="relationship" value={formData.contact.relationship}
-                                onChange={conChangeHandler}/>
-                            </Form.Group>
-                        </div>
-                        <div className="col_2">
-                            <Form.Group className="mb-3" controlId="contact_name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" name="name" value={formData.contact.name} onChange={conChangeHandler}/>
-                            </Form.Group>
-                            <Form.Group controlId="formGridState">
-                                <Form.Label>Gender</Form.Label>
-                                <Form.Select name="gender" value={formData.contact.gender}
-                                onChange={conChangeHandler}>
-                                    <option>male</option>
-                                    <option>female</option>
-                                </Form.Select>
-                            </Form.Group>
-                        </div>
-                        <div className="col_3">
-                            <Form.Group className="mb-3" controlId="contact_phone">
-                                <Form.Label>Mobile phone</Form.Label>
-                                <Form.Control type="text" placeholder="Enter contact phone number" name="phone" value={formData.contact.phone} onChange={conChangeHandler}/>
-                            </Form.Group>
-                        </div>
-                        <div className="col_4">
-                            <Form.Group className="mb-3" controlId="contact_address">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control type="text" placeholder="Enter contact address" name="address" value={formData.contact.address} onChange={conChangeHandler}/>
-                            </Form.Group>
-                        </div>
-                    </div> */}
                     <div className="phr_top_right">
                         <div className="title">Condition</div>
                         <div className="col_1">
@@ -480,12 +451,13 @@ function HospitalSendPHR() {
                                 <div className="title">Medication</div>
                                 <Button variant="secondary" onClick={addMedication}>+</Button>
                             </div>
-                            
-                            {mediItem.map((item, index) => {
-                                return (
-                                    <MedicationItem index={item} key={index} remove={removeMedication} />
-                                )
-                            })}
+                            <div className="medi_content">
+                                {mediItems.map((item, index) => {
+                                    return (
+                                        <MedicationItem mediItem={item} key={index} remove={removeMedication} setMediItems={setMediItems} itemList={mediItems}/>
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2,12 +2,13 @@ import { Form, CloseButton, DropdownButton, Dropdown, Button } from "react-boots
 import { useState } from 'react';
 
 import "../css/MedicationItem.css"
-function MedicationItem({index, remove}) {
+function MedicationItem({mediItem, remove, setMediItems, itemList}) {
     // unit State는 추후에 상위 컴포넌트에서 FHIR MedicationReport 부분에서 핸들링 할 수 있도록
     // 상위 컴포넌트로 넘길 예정
     const [item, setItem] = useState({
-        id: index,
+        id: mediItem.id,
         medication: "",
+        amount: "",
         unit: "L",
     });
 
@@ -23,13 +24,17 @@ function MedicationItem({index, remove}) {
             ...item,
             [e.target.name]: e.target.value
         })
-        console.log(item);
+        editItem(mediItem.id, item);
     }
 
     const removeItem = () => {
-        console.log(index);
-        remove(index);
+        remove(mediItem.id);
     }
+
+    const editItem = (id, item) => {
+        setMediItems(itemList.map((it) => it.id === id ? {...it, ...item} : it))
+    }
+
     return (
         <div className="medi_item">
             {/* <div className="row_1">
@@ -43,8 +48,8 @@ function MedicationItem({index, remove}) {
             </div>
             <div className="row_2">
                 <Form.Group className="mb-3" controlId="amount">
-                    <Form.Control type="text" name="amount" placeholder="Medication Amount"
-                    value={item.medication} onChange={onChangeHandler}/>
+                    <Form.Control type="number" name="amount" placeholder="Medication Amount"
+                    value={item.amount} onChange={onChangeHandler}/>
                 </Form.Group>
             </div>
             <div className="row_3">

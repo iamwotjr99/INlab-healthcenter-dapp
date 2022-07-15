@@ -1,3 +1,6 @@
+.medi_content {
+    overflow: auto;
+}
 .medi_item {
     display: flex;
     flex-direction: row;
