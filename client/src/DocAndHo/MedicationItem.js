@@ -13,6 +13,7 @@ function MedicationItem({mediItem, remove, setMediItems, itemList}) {
     });
 
     const onSelectHandler = (e) => {
+        console.log(e);
         setItem({
             ...item,
             unit: e
@@ -35,6 +36,10 @@ function MedicationItem({mediItem, remove, setMediItems, itemList}) {
         setMediItems(itemList.map((it) => it.id === id ? {...it, ...item} : it))
     }
 
+    const popperConfig = {
+        strategy: "fixed"
+    };
+
     return (
         <div className="medi_item">
             {/* <div className="row_1">
@@ -53,12 +58,17 @@ function MedicationItem({mediItem, remove, setMediItems, itemList}) {
                 </Form.Group>
             </div>
             <div className="row_3">
-                <DropdownButton id="dropdown-basic-button" title={item.unit}
-                onSelect={onSelectHandler} >
-                    <Dropdown.Item eventKey="L">L</Dropdown.Item>
-                    <Dropdown.Item eventKey="ml">ml</Dropdown.Item>
-                    <Dropdown.Item eventKey="cc">cc</Dropdown.Item>
-                </DropdownButton>
+                <Dropdown onSelect={onSelectHandler} >
+                    <Dropdown.Toggle id="dropdown-basic-button">
+                        {item.unit}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu popperConfig={popperConfig}>
+                        <Dropdown.Item eventKey="L">L</Dropdown.Item>
+                        <Dropdown.Item eventKey="ml">ml</Dropdown.Item>
+                        <Dropdown.Item eventKey="cc">cc</Dropdown.Item>
+                        <Dropdown.Item eventKey="TAB">TAB</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
             <div className="row_4">
                 <CloseButton onClick={removeItem}/>

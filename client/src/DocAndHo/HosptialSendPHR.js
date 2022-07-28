@@ -21,18 +21,12 @@ function HospitalSendPHR() {
         gender: "",
         birthdate: "",
         address: "",
-        contact: {
-            name: "",
-            phone: "",
-            relationship: "",
-            address: "",
-            gender: "",
-        },
         symptom: "",
         comment: "",
         description: "",
         doctorName: "",
-        createdAt: ""
+        createdAt: "",
+        therapy: "",
     });
 
     const [mediItems, setMediItems] = useState([])
@@ -60,6 +54,7 @@ function HospitalSendPHR() {
 
     const toastId  = useRef();
     const sendPHR = async () => {
+        console.log(mediItems)
         axios.put(`${BASE_URL}/Patient/${formData.pid}`, {
            "resourceType": "Patient",
            "id": formData.pid,
@@ -130,6 +125,9 @@ function HospitalSendPHR() {
         }).then((res) => {
            console.log("from server: ", res);
            postCondition(res);
+           postEncounter(res).then((encounterRes) => {
+            postProcedure(encounterRes);
+           })
        })
     }
 
@@ -311,6 +309,101 @@ function HospitalSendPHR() {
         }
     }
 
+    const postEncounter = async (prevResult) => {
+        if(prevResult !== undefined) {
+            await axios.put(`${BASE_URL}/Encounter/${formData.pid}`, {
+                "resourceType": "Encounter",
+                "id": formData.pid,
+                "type": [
+                  {
+                    "coding": [
+                      {
+                        "display": "Consultation"
+                      }
+                    ]
+                  }
+                ],
+                "priority": {
+                  "coding": [
+                    {
+                      "display": "Normal"
+                    }
+                  ]
+                },
+                "subject": {
+                  "reference": `Patient/${formData.pid}`
+                },
+                "participant": [
+                  {
+                    "individual": {
+                      "reference": `Practitioner/${formData.doctorName}`
+                    }
+                  }
+                ],
+                "serviceProvider": {
+                  "reference": `Organization/${formData.assigner}`
+                }
+              }).then((res) => {
+                console.log("Post Encounter: ", res);
+              })
+        }
+    }
+
+    const postProcedure = async (prevResult) => {
+        if(prevResult !== undefined) {
+            await axios.put(`${BASE_URL}/Procedure/${formData.pid}`,{
+                "resourceType": "Procedure",
+                "id": formData.pid,
+                "status": "completed",
+                "code": {
+                  "coding": [
+                    {
+                      "display": "Tracheotomy"
+                    }
+                  ]
+                },
+                "subject": {
+                  "reference": `Patient/${formData.pid}`,
+                  "display": formData.name
+                },
+                "encounter": {
+                  "reference": `Encounter/${formData.pid}`
+                },
+                // "performedPeriod": {
+                //   "start": formData.createdAt
+                // },
+                "performer": [
+                  {
+                    "actor": {
+                      "reference": `Practitioner/${formData.doctorName}`,
+                      "display": formData.doctorName
+                    }
+                  }
+                ],
+                "bodySite": [
+                  {
+                    "coding": [
+                      {
+                        "display": formData.symptom
+                      }
+                    ]
+                  }
+                ],
+                "outcome": {
+                  "text": formData.therapy
+                },
+                "followUp": [
+                  {
+                    "text": formData.comment
+                  }
+                ]
+              }).then((res) => {
+                console.log("Procedure: ", res);
+              })
+        }
+        
+    }
+
     const phrHash = (pid) => {
         const PHRhash = crypto.SHA256(pid, 'INLab').toString();
         return PHRhash
@@ -368,9 +461,12 @@ function HospitalSendPHR() {
             address: "",
             symptom: "",
             comment: "",
+            description: "",
             doctorName: "",
-            createdAt: ""
-        })
+            createdAt: "",
+            therapy: "",
+        });
+        setMediItems([]);
     }
 
     const onClickSendHandler = async() => {
@@ -466,7 +562,7 @@ function HospitalSendPHR() {
                     <div className="col_1">
                         <Form.Group className="mb-3" controlId="therapy">
                             <Form.Label>Therapy</Form.Label>
-                            <Form.Control type="text" name="therapy" value={formData.symptom}
+                            <Form.Control type="text" name="therapy" value={formData.therapy}
                             onChange={changeHandler}/>
                         </Form.Group>
                     </div>
